@@ -58,7 +58,7 @@ function Education() {
 			</p>
 			<p>
 				<label for="studyDate">Date: </label>
-				<input id="studyDate" type="text" />
+				<input id="studyDate" type="month" />
 			</p>
 		</section>
 	);
@@ -80,8 +80,10 @@ function Experience() {
 				<input id="jobTitle" type="text" />
 			</p>
 			<p>
-				<label for="workDate">Date: </label>
-				<input id="workDate" type="text" />
+				<label for="workDateStart">From: </label>
+				<input id="workDateStart" type="month" />
+				<label for="workDateEnd">To: </label>
+				<input id="workDateEnd" type="month" />
 			</p>
 			<p>
 				<label for="jobDescription">Description: </label>
