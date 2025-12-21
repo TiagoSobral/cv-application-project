@@ -5,10 +5,12 @@ export default function CvApplication() {
 				<h1>Cv Application</h1>
 			</header>
 			<main>
-				<GeneralInformation />
-				<Education />
-				<Experience />
-				<Button id="submit" type="submit" value="submit" text="Submit" />
+				<form key="application-form">
+					<GeneralInformation />
+					<Education />
+					<Experience />
+					<Button id="submit" type="submit" value="submit" text="Submit" />
+				</form>
 			</main>
 		</>
 	);
@@ -16,86 +18,74 @@ export default function CvApplication() {
 
 function GeneralInformation() {
 	return (
-		<section key="personalInformation">
-			<h1>
-				Personal Information
-				<Button />
-			</h1>
-			<p>
-				<label for="firstName">First Name: </label>
-				<input id="firstName" type="text" />
-			</p>
-			<p>
-				<label for="LastName">Last Name: </label>
-				<input id="LastName" type="text" />
-			</p>
-			<p>
-				<label for="email">Email: </label>
-				<input id="email" type="email" />
-			</p>
-			<p>
-				<label for="phoneNumber">Phone Number: </label>
-				<input id="phoneNumber" type="tel" />
-			</p>
-		</section>
+		<>
+			<Header className="title" titleText="Personal Information" />
+			<Input id="firstName" text="First Name: " />
+			<Input id="lastName" text="Last Name: " />
+			<Input id="email" text="Email: " type="email" />
+			<Input id="phoneNumber" text="Phone Number: " type="tel" />
+		</>
 	);
 }
 
 function Education() {
 	return (
-		<section key="education">
-			<h1>
-				Educational Experience
-				<Button />
-			</h1>
-			<p>
-				<label for="schoolName">School Name: </label>
-				<input id="schoolName" type="text" />
-			</p>
-			<p>
-				<label for="studyTitle">Type: </label>
-				<input id="studyTitle" type="text" />
-			</p>
-			<p>
-				<label for="studyDate">Date: </label>
-				<input id="studyDate" type="month" />
-			</p>
+		<section className="education">
+			<Header className="title" titleText="Educational Experience" />
+			<Input id="schoolName" text="School: " />
+			<Input id="studyCertification" text="Type: " />
+			<Input id="studyDate" text="From: " type="month" />
 		</section>
 	);
 }
 
 function Experience() {
 	return (
-		<section key="experience">
-			<h1>
-				Professional Experience
-				<Button id="edit" type="button" value="edit" />
-			</h1>
-			<p>
-				<label for="companyName">Employer: </label>
-				<input id="companyName" type="text" />
-			</p>
-			<p>
-				<label for="jobTitle">Job Title: </label>
-				<input id="jobTitle" type="text" />
-			</p>
-			<p>
-				<label for="workDateStart">From: </label>
-				<input id="workDateStart" type="month" />
-				<label for="workDateEnd">To: </label>
-				<input id="workDateEnd" type="month" />
-			</p>
-			<p>
-				<label for="jobDescription">Description: </label>
-				<textarea name="jobDescription" id="jobDescription"></textarea>
-			</p>
+		<section className="experience">
+			<Header className="title" titleText="Work Experience" />
+			<Input id="companyName" text="Employer: " />
+			<Input id="jobTitle" text="Job Title: " />
+			<Input id="workDateStart" text="From: " />
+			<Input id="workDateEnd" text="To: " />
+			<JobDescription />
 		</section>
 	);
 }
 
-function Button({ id, type, value, text = '' }) {
+function Header({ className, titleText }) {
 	return (
-		<button key={id} type={type} value={value}>
+		<div className={className}>
+			<h1>{titleText}</h1>
+			<Button id="edit" type="button" value="edit" />
+		</div>
+	);
+}
+
+function Input({ type = 'text', id, text }) {
+	return (
+		<p>
+			<label htmlFor={id}>{text}</label>
+			<input type={type} id={id} />
+		</p>
+	);
+}
+
+function JobDescription() {
+	return (
+		<p>
+			<label for="jobDescription">Description: </label>
+			<textarea name="jobDescription" id="jobDescription"></textarea>
+		</p>
+	);
+}
+
+function Button({ id, type, value, text = '' }) {
+	function handleSubmit(e) {
+		e.preventDefault();
+	}
+
+	return (
+		<button key={id} type={type} value={value} onClick={handleSubmit}>
 			{text}
 		</button>
 	);
