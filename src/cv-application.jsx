@@ -7,6 +7,7 @@ export default function CvApplication() {
 			<main>
 				<GeneralInformation />
 				<Education />
+				<Experience />
 			</main>
 		</>
 	);
@@ -51,6 +52,30 @@ function Education() {
 			<p>
 				<label for="studyDate">Date: </label>
 				<input id="studyDate" type="text" />
+			</p>
+		</section>
+	);
+}
+
+function Experience() {
+	return (
+		<section key="experience">
+			<h1>Professional Experience</h1>
+			<p>
+				<label for="companyName">Employer: </label>
+				<input id="companyName" type="text" />
+			</p>
+			<p>
+				<label for="jobTitle">Job Title: </label>
+				<input id="jobTitle" type="text" />
+			</p>
+			<p>
+				<label for="workDate">Date: </label>
+				<input id="workDate" type="text" />
+			</p>
+			<p>
+				<label for="jobDescription">Description: </label>
+				<textarea name="jobDescription" id="jobDescription"></textarea>
 			</p>
 		</section>
 	);
