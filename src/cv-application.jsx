@@ -8,6 +8,7 @@ export default function CvApplication() {
 				<GeneralInformation />
 				<Education />
 				<Experience />
+				<Button id="submit" type="submit" value="submit" text="Submit" />
 			</main>
 		</>
 	);
@@ -16,7 +17,10 @@ export default function CvApplication() {
 function GeneralInformation() {
 	return (
 		<section key="personalInformation">
-			<h1>Personal Information</h1>
+			<h1>
+				Personal Information
+				<Button />
+			</h1>
 			<p>
 				<label for="firstName">First Name: </label>
 				<input id="firstName" type="text" />
@@ -40,7 +44,10 @@ function GeneralInformation() {
 function Education() {
 	return (
 		<section key="education">
-			<h1>Educational Experience</h1>
+			<h1>
+				Educational Experience
+				<Button />
+			</h1>
 			<p>
 				<label for="schoolName">School Name: </label>
 				<input id="schoolName" type="text" />
@@ -60,7 +67,10 @@ function Education() {
 function Experience() {
 	return (
 		<section key="experience">
-			<h1>Professional Experience</h1>
+			<h1>
+				Professional Experience
+				<Button id="edit" type="button" value="edit" />
+			</h1>
 			<p>
 				<label for="companyName">Employer: </label>
 				<input id="companyName" type="text" />
@@ -78,5 +88,13 @@ function Experience() {
 				<textarea name="jobDescription" id="jobDescription"></textarea>
 			</p>
 		</section>
+	);
+}
+
+function Button({ id, type, value, text = '' }) {
+	return (
+		<button key={id} type={type} value={value}>
+			{text}
+		</button>
 	);
 }
