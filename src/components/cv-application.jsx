@@ -1,52 +1,77 @@
+import { useState } from 'react';
+
 export default function CvApplication() {
+	const [inputValues, setInputValues] = useState({});
+
+	function handleInput(e) {
+		const id = e.target.id;
+		const value = e.target.value;
+		setInputValues({ ...inputValues, [id]: value });
+	}
+
+	function handleSubmit(e) {
+		e.preventDefault();
+	}
+
 	return (
 		<>
 			<header>
 				<h1>Cv Application</h1>
 			</header>
 			<main>
-				<form key="application-form">
-					<GeneralInformation />
-					<Education />
-					<Experience />
-					<Button id="submit" type="submit" value="submit" text="Submit" />
+				<form className="application">
+					<GeneralInformation onChange={handleInput} />
+					<Education onChange={handleInput} />
+					<Experience onChange={handleInput} />
+					<Button
+						id="submit"
+						type="submit"
+						value="submit"
+						text="Submit"
+						onClick={handleSubmit}
+					/>
 				</form>
 			</main>
 		</>
 	);
 }
 
-function GeneralInformation() {
+function GeneralInformation({ onChange }) {
 	return (
 		<>
 			<Header className="title" titleText="Personal Information" />
-			<Input id="firstName" text="First Name: " />
-			<Input id="lastName" text="Last Name: " />
-			<Input id="email" text="Email: " type="email" />
-			<Input id="phoneNumber" text="Phone Number: " type="tel" />
+			<Input id="firstName" text="First Name: " onChange={onChange} />
+			<Input id="lastName" text="Last Name: " onChange={onChange} />
+			<Input id="email" text="Email: " type="email" onChange={onChange} />
+			<Input
+				id="phoneNumber"
+				text="Phone Number: "
+				type="tel"
+				onChange={onChange}
+			/>
 		</>
 	);
 }
 
-function Education() {
+function Education({ onChange }) {
 	return (
 		<section className="education">
 			<Header className="title" titleText="Educational Experience" />
-			<Input id="schoolName" text="School: " />
-			<Input id="studyCertification" text="Type: " />
-			<Input id="studyDate" text="From: " type="month" />
+			<Input id="schoolName" text="School: " onChange={onChange} />
+			<Input id="studyCertification" text="Type: " onChange={onChange} />
+			<Input id="studyDate" text="From: " type="month" onChange={onChange} />
 		</section>
 	);
 }
 
-function Experience() {
+function Experience({ onChange }) {
 	return (
 		<section className="experience">
 			<Header className="title" titleText="Work Experience" />
-			<Input id="companyName" text="Employer: " />
-			<Input id="jobTitle" text="Job Title: " />
-			<Input id="workDateStart" text="From: " />
-			<Input id="workDateEnd" text="To: " />
+			<Input id="companyName" text="Employer: " onChange={onChange} />
+			<Input id="jobTitle" text="Job Title: " onChange={onChange} />
+			<Input id="workDateStart" text="From: " onChange={onChange} />
+			<Input id="workDateEnd" text="To: " onChange={onChange} />
 			<JobDescription />
 		</section>
 	);
@@ -61,11 +86,11 @@ function Header({ className, titleText }) {
 	);
 }
 
-function Input({ type = 'text', id, text }) {
+function Input({ type = 'text', id, text, onChange }) {
 	return (
 		<p>
 			<label htmlFor={id}>{text}</label>
-			<input type={type} id={id} />
+			<input type={type} id={id} onChange={onChange} />
 		</p>
 	);
 }
@@ -79,13 +104,9 @@ function JobDescription() {
 	);
 }
 
-export function Button({ id, type = 'button', value, text = '' }) {
-	function handleSubmit(e) {
-		e.preventDefault();
-	}
-
+export function Button({ id, type = 'button', value, text = '', onClick }) {
 	return (
-		<button key={id} type={type} value={value} onClick={handleSubmit}>
+		<button key={id} type={type} value={value} onClick={onClick}>
 			{text}
 		</button>
 	);
