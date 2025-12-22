@@ -79,7 +79,7 @@ function JobDescription() {
 	);
 }
 
-function Button({ id, type, value, text = '' }) {
+export function Button({ id, type = 'button', value, text = '' }) {
 	function handleSubmit(e) {
 		e.preventDefault();
 	}

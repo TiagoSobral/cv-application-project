@@ -1,0 +1,9 @@
+.personName {
+	text-align: center;
+}
+
+.contacts {
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+}
