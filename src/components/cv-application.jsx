@@ -1,8 +1,8 @@
-import { useState } from 'react';
-
-export default function CvApplication() {
-	const [inputValues, setInputValues] = useState({});
-
+export default function CvApplication({
+	inputValues,
+	setInputValues,
+	setPage,
+}) {
 	function handleInput(e) {
 		const id = e.target.id;
 		const value = e.target.value;
@@ -11,6 +11,7 @@ export default function CvApplication() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		setPage(1);
 	}
 
 	return (
@@ -98,7 +99,7 @@ function Input({ type = 'text', id, text, onChange }) {
 function JobDescription() {
 	return (
 		<p>
-			<label for="jobDescription">Description: </label>
+			<label htmlFor="jobDescription">Description: </label>
 			<textarea name="jobDescription" id="jobDescription"></textarea>
 		</p>
 	);
