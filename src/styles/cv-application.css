@@ -3,3 +3,16 @@
 	margin: 0 auto;
 	padding: 2rem;
 }
+
+button[value='edit'] {
+	width: 3rem;
+	height: 1.7rem;
+	background-image: url(../svgs/edit.svg);
+	background-size: 40%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+button[value='submit'] {
+	padding: 0.7rem 2rem;
+}
