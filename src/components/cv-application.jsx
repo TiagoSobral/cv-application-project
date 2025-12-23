@@ -73,7 +73,7 @@ function Experience({ onChange }) {
 			<Input id="jobTitle" text="Job Title: " onChange={onChange} />
 			<Input id="workDateStart" text="From: " onChange={onChange} />
 			<Input id="workDateEnd" text="To: " onChange={onChange} />
-			<JobDescription />
+			<JobDescription onChange={onChange} />
 		</section>
 	);
 }
@@ -96,11 +96,15 @@ function Input({ type = 'text', id, text, onChange }) {
 	);
 }
 
-function JobDescription() {
+function JobDescription({ onChange }) {
 	return (
 		<p>
 			<label htmlFor="jobDescription">Description: </label>
-			<textarea name="jobDescription" id="jobDescription"></textarea>
+			<textarea
+				name="jobDescription"
+				id="jobDescription"
+				onChange={onChange}
+			></textarea>
 		</p>
 	);
 }
