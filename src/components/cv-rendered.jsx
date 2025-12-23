@@ -1,22 +1,29 @@
 import '../styles/cv-rendered.css';
 import { Button } from './cv-application';
 
-export default function CvRendered() {
+export default function CvRendered({ form }) {
+	console.log(form);
 	return (
 		<>
 			<AboutMe
-				firstName="Tiago"
-				LastName="Sobral"
-				email="tiagosvaratojo@gmail.com"
-				phoneNumber="+1 647 762 0056"
+				firstName={form.firstName}
+				LastName={form.lastName}
+				email={form.email}
+				phoneNumber={form.phoneNumber}
 			/>
 			<RenderedEducation
 				title="Education"
-				schoolName="Estoril Universitiy of Hotel & Tourism Studies"
-				date="2017"
-				type="Bacherlor - Hotel Management"
+				schoolName={form.schoolName}
+				date={form.studyDate}
+				type={form.studyCertification}
 			/>
-			<RenderedWork />
+			<RenderedWork
+				position={form.jobTitle}
+				startDate={form.workDateStart}
+				endDate={form.workDateEnd}
+				companyName={form.companyName}
+				description={form.jobDescription}
+			/>
 		</>
 	);
 }
