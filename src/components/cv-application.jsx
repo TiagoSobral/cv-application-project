@@ -82,7 +82,6 @@ function Header({ className, titleText }) {
 	return (
 		<div className={className}>
 			<h1>{titleText}</h1>
-			<Button id="edit" type="button" value="edit" />
 		</div>
 	);
 }
