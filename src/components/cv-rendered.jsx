@@ -1,8 +1,13 @@
 import '../styles/cv-rendered.css';
+import '../index.css';
 import { Button } from './cv-application';
 
-export default function CvRendered({ form }) {
-	console.log(form);
+export default function CvRendered({ form, changePage, setValues }) {
+	function handleEdit() {
+		changePage(0);
+		setValues(form);
+	}
+
 	return (
 		<>
 			<AboutMe
@@ -24,6 +29,7 @@ export default function CvRendered({ form }) {
 				companyName={form.companyName}
 				description={form.jobDescription}
 			/>
+			<Button className="aboutBtn" value="edit" onClick={handleEdit} />
 		</>
 	);
 }
@@ -52,7 +58,6 @@ function RenderedEducation({ title, schoolName, date, type }) {
 	return (
 		<>
 			<h1>{title}</h1>
-			<Button id="eduBtn" value="edit" />
 			<ul className="School">
 				<li>
 					<b>{schoolName}</b>
@@ -74,7 +79,6 @@ function RenderedWork({
 	return (
 		<>
 			<h1>Work Experience</h1>
-			<Button id="workBtn" value="edit" />
 			<ul>
 				<li>{position}</li>
 				<li>

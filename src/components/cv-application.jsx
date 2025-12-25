@@ -21,9 +21,12 @@ export default function CvApplication({
 			</header>
 			<main>
 				<form className="application">
-					<GeneralInformation onChange={handleInput} />
-					<Education onChange={handleInput} />
-					<Experience onChange={handleInput} />
+					<GeneralInformation
+						onChange={handleInput}
+						inputValues={inputValues}
+					/>
+					<Education onChange={handleInput} inputValues={inputValues} />
+					<Experience onChange={handleInput} inputValues={inputValues} />
 					<Button
 						id="submit"
 						type="submit"
@@ -37,42 +40,95 @@ export default function CvApplication({
 	);
 }
 
-function GeneralInformation({ onChange }) {
+function GeneralInformation({ onChange, inputValues }) {
 	return (
 		<>
 			<Header className="title" titleText="Personal Information" />
-			<Input id="firstName" text="First Name: " onChange={onChange} />
-			<Input id="lastName" text="Last Name: " onChange={onChange} />
-			<Input id="email" text="Email: " type="email" onChange={onChange} />
+			<Input
+				id="firstName"
+				text="First Name: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="lastName"
+				text="Last Name: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="email"
+				text="Email: "
+				type="email"
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
 			<Input
 				id="phoneNumber"
 				text="Phone Number: "
 				type="tel"
 				onChange={onChange}
+				inputValues={inputValues}
 			/>
 		</>
 	);
 }
 
-function Education({ onChange }) {
+function Education({ onChange, inputValues }) {
 	return (
 		<section className="education">
 			<Header className="title" titleText="Educational Experience" />
-			<Input id="schoolName" text="School: " onChange={onChange} />
-			<Input id="studyCertification" text="Type: " onChange={onChange} />
-			<Input id="studyDate" text="From: " type="month" onChange={onChange} />
+			<Input
+				id="schoolName"
+				text="School: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="studyCertification"
+				text="Type: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="studyDate"
+				text="From: "
+				type="month"
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
 		</section>
 	);
 }
 
-function Experience({ onChange }) {
+function Experience({ onChange, inputValues }) {
 	return (
 		<section className="experience">
 			<Header className="title" titleText="Work Experience" />
-			<Input id="companyName" text="Employer: " onChange={onChange} />
-			<Input id="jobTitle" text="Job Title: " onChange={onChange} />
-			<Input id="workDateStart" text="From: " onChange={onChange} />
-			<Input id="workDateEnd" text="To: " onChange={onChange} />
+			<Input
+				id="companyName"
+				text="Employer: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="jobTitle"
+				text="Job Title: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="workDateStart"
+				text="From: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
+			<Input
+				id="workDateEnd"
+				text="To: "
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
 			<JobDescription onChange={onChange} />
 		</section>
 	);
@@ -86,11 +142,11 @@ function Header({ className, titleText }) {
 	);
 }
 
-function Input({ type = 'text', id, text, onChange }) {
+function Input({ type = 'text', id, text, onChange, inputValues }) {
 	return (
 		<p>
 			<label htmlFor={id}>{text}</label>
-			<input type={type} id={id} onChange={onChange} />
+			<input type={type} id={id} onChange={onChange} value={inputValues[id]} />
 		</p>
 	);
 }
@@ -108,10 +164,12 @@ function JobDescription({ onChange }) {
 	);
 }
 
-export function Button({ id, type = 'button', value, text = '', onClick }) {
+function Button({ type = 'button', value, text = '', onClick }) {
 	return (
-		<button key={id} type={type} value={value} onClick={onClick}>
+		<button type={type} value={value} onClick={onClick}>
 			{text}
 		</button>
 	);
 }
+
+export { Button };
