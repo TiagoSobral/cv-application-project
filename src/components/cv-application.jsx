@@ -4,11 +4,7 @@ import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
 
-export default function CvApplication({
-	inputValues,
-	setInputValues,
-	setPage,
-}) {
+function CvApplication({ inputValues, setInputValues, setPage }) {
 	const elementsInfo = dataElementGeneration;
 
 	function handleInput(e) {
@@ -24,9 +20,7 @@ export default function CvApplication({
 
 	return (
 		<>
-			<header>
-				<h1>Cv Application</h1>
-			</header>
+			<Header className="title" titleText="CV Application" />
 			<main>
 				<form className="application">
 					<PersonalInformation
@@ -58,11 +52,7 @@ export default function CvApplication({
 }
 
 function Header({ className, titleText }) {
-	return (
-		<div className={className}>
-			<h1>{titleText}</h1>
-		</div>
-	);
+	return <h1 className={className}>{titleText}</h1>;
 }
 
-export { Button };
+export { CvApplication, Header };

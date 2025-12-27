@@ -1,4 +1,5 @@
 import GroupInputFields from './inputs';
+import { Header } from './cv-application';
 
 export default function Education({ dataInfo, onChange, inputValues }) {
 	return (
