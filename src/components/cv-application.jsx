@@ -56,6 +56,7 @@ export default function CvApplication({
 function GeneralInformation({ dataInfo, onChange, inputValues }) {
 	const generateInput = dataInfo.map((value) => (
 		<Input
+			type={findType(value.id)}
 			id={value.id}
 			text={value.title}
 			onChange={onChange}
@@ -64,16 +65,17 @@ function GeneralInformation({ dataInfo, onChange, inputValues }) {
 	));
 
 	return (
-		<>
+		<fieldset className="personalInformation">
 			<Header className="title" titleText="Personal Information" />
 			{generateInput}
-		</>
+		</fieldset>
 	);
 }
 
 function Education({ dataInfo, onChange, inputValues }) {
 	const generateInput = dataInfo.map((value) => (
 		<Input
+			type={findType(value.id)}
 			id={value.id}
 			text={value.title}
 			onChange={onChange}
@@ -81,16 +83,17 @@ function Education({ dataInfo, onChange, inputValues }) {
 		/>
 	));
 	return (
-		<section className="education">
+		<fieldset className="education">
 			<Header className="title" titleText="Educational Experience" />
 			{generateInput}
-		</section>
+		</fieldset>
 	);
 }
 
 function Experience({ dataInfo, onChange, inputValues }) {
 	const generateInput = dataInfo.map((value) => (
 		<Input
+			type={findType(value.id)}
 			id={value.id}
 			text={value.title}
 			onChange={onChange}
@@ -98,11 +101,11 @@ function Experience({ dataInfo, onChange, inputValues }) {
 		/>
 	));
 	return (
-		<section className="experience">
+		<fieldset className="experience">
 			<Header className="title" titleText="Work Experience" />
 			{generateInput}
 			<JobDescription onChange={onChange} />
-		</section>
+		</fieldset>
 	);
 }
 
@@ -142,6 +145,24 @@ function Button({ type = 'button', value, text = '', onClick }) {
 			{text}
 		</button>
 	);
+}
+
+// helper function that returns the type of input correspondent to the id received.
+function findType(id) {
+	switch (id) {
+		case 'email':
+			return 'email';
+		case 'phoneNumber':
+			return 'tel';
+		case 'studyDate':
+			return 'number';
+		case 'workDateStart':
+			return 'month';
+		case 'workDateEnd':
+			return 'month';
+		default:
+			return 'text';
+	}
 }
 
 export { Button };
