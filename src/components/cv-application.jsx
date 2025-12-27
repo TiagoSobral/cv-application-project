@@ -1,8 +1,12 @@
+import { dataElementGeneration } from './data';
+
 export default function CvApplication({
 	inputValues,
 	setInputValues,
 	setPage,
 }) {
+	const elementsInfo = dataElementGeneration;
+
 	function handleInput(e) {
 		const id = e.target.id;
 		const value = e.target.value;
@@ -22,11 +26,20 @@ export default function CvApplication({
 			<main>
 				<form className="application">
 					<GeneralInformation
+						dataInfo={elementsInfo.generalInfo}
 						onChange={handleInput}
 						inputValues={inputValues}
 					/>
-					<Education onChange={handleInput} inputValues={inputValues} />
-					<Experience onChange={handleInput} inputValues={inputValues} />
+					<Education
+						dataInfo={elementsInfo.education}
+						onChange={handleInput}
+						inputValues={inputValues}
+					/>
+					<Experience
+						dataInfo={elementsInfo.work}
+						onChange={handleInput}
+						inputValues={inputValues}
+					/>
 					<Button
 						id="submit"
 						type="submit"
@@ -40,95 +53,54 @@ export default function CvApplication({
 	);
 }
 
-function GeneralInformation({ onChange, inputValues }) {
+function GeneralInformation({ dataInfo, onChange, inputValues }) {
+	const generateInput = dataInfo.map((value) => (
+		<Input
+			id={value.id}
+			text={value.title}
+			onChange={onChange}
+			inputValues={inputValues}
+		/>
+	));
+
 	return (
 		<>
 			<Header className="title" titleText="Personal Information" />
-			<Input
-				id="firstName"
-				text="First Name: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="lastName"
-				text="Last Name: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="email"
-				text="Email: "
-				type="email"
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="phoneNumber"
-				text="Phone Number: "
-				type="tel"
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
+			{generateInput}
 		</>
 	);
 }
 
-function Education({ onChange, inputValues }) {
+function Education({ dataInfo, onChange, inputValues }) {
+	const generateInput = dataInfo.map((value) => (
+		<Input
+			id={value.id}
+			text={value.title}
+			onChange={onChange}
+			inputValues={inputValues}
+		/>
+	));
 	return (
 		<section className="education">
 			<Header className="title" titleText="Educational Experience" />
-			<Input
-				id="schoolName"
-				text="School: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="studyCertification"
-				text="Type: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="studyDate"
-				text="From: "
-				type="month"
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
+			{generateInput}
 		</section>
 	);
 }
 
-function Experience({ onChange, inputValues }) {
+function Experience({ dataInfo, onChange, inputValues }) {
+	const generateInput = dataInfo.map((value) => (
+		<Input
+			id={value.id}
+			text={value.title}
+			onChange={onChange}
+			inputValues={inputValues}
+		/>
+	));
 	return (
 		<section className="experience">
 			<Header className="title" titleText="Work Experience" />
-			<Input
-				id="companyName"
-				text="Employer: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="jobTitle"
-				text="Job Title: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="workDateStart"
-				text="From: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
-			<Input
-				id="workDateEnd"
-				text="To: "
-				onChange={onChange}
-				inputValues={inputValues}
-			/>
+			{generateInput}
 			<JobDescription onChange={onChange} />
 		</section>
 	);
