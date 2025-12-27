@@ -54,44 +54,33 @@ export default function CvApplication({
 }
 
 function GeneralInformation({ dataInfo, onChange, inputValues }) {
-	const generateInput = dataInfo.map((value) => (
-		<Input
-			type={findType(value.id)}
-			id={value.id}
-			text={value.title}
-			onChange={onChange}
-			inputValues={inputValues}
-		/>
-	));
-
 	return (
 		<fieldset className="personalInformation">
 			<Header className="title" titleText="Personal Information" />
-			{generateInput}
+			<GroupInputFields
+				dataInfo={dataInfo}
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
 		</fieldset>
 	);
 }
 
 function Education({ dataInfo, onChange, inputValues }) {
-	const generateInput = dataInfo.map((value) => (
-		<Input
-			type={findType(value.id)}
-			id={value.id}
-			text={value.title}
-			onChange={onChange}
-			inputValues={inputValues}
-		/>
-	));
 	return (
 		<fieldset className="education">
 			<Header className="title" titleText="Educational Experience" />
-			{generateInput}
+			<GroupInputFields
+				dataInfo={dataInfo}
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
 		</fieldset>
 	);
 }
 
-function Experience({ dataInfo, onChange, inputValues }) {
-	const generateInput = dataInfo.map((value) => (
+function GroupInputFields({ dataInfo, onChange, inputValues }) {
+	return dataInfo.map((value) => (
 		<Input
 			type={findType(value.id)}
 			id={value.id}
@@ -100,10 +89,17 @@ function Experience({ dataInfo, onChange, inputValues }) {
 			inputValues={inputValues}
 		/>
 	));
+}
+
+function Experience({ dataInfo, onChange, inputValues }) {
 	return (
 		<fieldset className="experience">
 			<Header className="title" titleText="Work Experience" />
-			{generateInput}
+			<GroupInputFields
+				dataInfo={dataInfo}
+				onChange={onChange}
+				inputValues={inputValues}
+			/>
 			<JobDescription onChange={onChange} />
 		</fieldset>
 	);
