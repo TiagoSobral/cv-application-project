@@ -1,6 +1,6 @@
 import '../styles/cv-rendered.css';
 import '../index.css';
-import { Button } from './cv-application';
+import Button from './buttons.jsx';
 
 export default function CvRendered({ form, changePage, setValues }) {
 	function handleEdit() {

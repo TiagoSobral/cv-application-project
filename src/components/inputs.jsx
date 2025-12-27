@@ -2,7 +2,7 @@ function Input({ type = 'text', id, text, onChange, inputValues }) {
 	return (
 		<p>
 			<label htmlFor={id}>{text}</label>
-			<input type={type} id={id} onChange={onChange} value={inputValues[id]} />
+			<input type={type} id={id} onChange={onChange} />
 		</p>
 	);
 }
