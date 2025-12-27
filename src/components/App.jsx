@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import CvApplication from './cv-application';
 import CvRendered from './cv-rendered';
+import { cvData } from './data';
 
 export default function App() {
 	const [page, setPage] = useState(0);
-	const [inputValues, setInputValues] = useState({});
+	const [inputValues, setInputValues] = useState(cvData);
 
 	return page === 0 ? (
 		<CvApplication
@@ -13,6 +14,10 @@ export default function App() {
 			setInputValues={setInputValues}
 		/>
 	) : (
-		<CvRendered inputValues={inputValues} />
+		<CvRendered
+			form={inputValues}
+			changePage={setPage}
+			setValues={setInputValues}
+		/>
 	);
 }
