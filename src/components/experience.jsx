@@ -1,7 +1,13 @@
 import GroupInputFields from './inputs';
 import { Header } from './cv-application';
+import Button from './buttons';
 
-export default function Experience({ dataInfo, onChange, inputValues }) {
+export default function Experience({
+	dataInfo,
+	onChange,
+	inputValues,
+	onClick,
+}) {
 	return (
 		<fieldset className="experience">
 			<Header className="title" titleText="Work Experience" />
@@ -9,8 +15,10 @@ export default function Experience({ dataInfo, onChange, inputValues }) {
 				dataInfo={dataInfo}
 				onChange={onChange}
 				inputValues={inputValues}
+				className="experience"
 			/>
 			<JobDescription onChange={onChange} />
+			<Button value="Add" onClick={onClick} className="education" />
 		</fieldset>
 	);
 }

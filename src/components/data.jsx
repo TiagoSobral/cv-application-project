@@ -14,7 +14,7 @@ export let cvData = {
 			},
 		],
 	},
-	workExperience: {
+	experience: {
 		children: [
 			{
 				companyName: '',
@@ -45,3 +45,12 @@ export const dataElementGeneration = {
 		{ title: 'To: ', id: 'workDateEnd' },
 	],
 };
+
+/* 
+{
+  ...person, // Copy other fields
+  artwork: { // but replace the artwork
+    ...person.artwork, // with the same one
+    city: 'New Delhi' // but in New Delhi!
+  }
+} */

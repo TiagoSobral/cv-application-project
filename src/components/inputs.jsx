@@ -1,13 +1,31 @@
-function Input({ type = 'text', id, text, onChange, inputValues }) {
+function Input({
+	type = 'text',
+	id,
+	text,
+	onChange,
+	inputValues,
+	className = 'personalInfo',
+}) {
 	return (
 		<p>
 			<label htmlFor={id}>{text}</label>
-			<input type={type} id={id} onChange={onChange} />
+			<input
+				type={type}
+				id={id}
+				onChange={onChange}
+				value={inputValues[id]}
+				className={className}
+			/>
 		</p>
 	);
 }
 
-export default function GroupInputFields({ dataInfo, onChange, inputValues }) {
+export default function GroupInputFields({
+	dataInfo,
+	onChange,
+	inputValues,
+	className,
+}) {
 	// helper function that returns the type of input correspondent to the id received.
 	function findType(id) {
 		switch (id) {
@@ -33,6 +51,7 @@ export default function GroupInputFields({ dataInfo, onChange, inputValues }) {
 			text={value.title}
 			onChange={onChange}
 			inputValues={inputValues}
+			className={className}
 		/>
 	));
 }

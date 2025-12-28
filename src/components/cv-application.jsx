@@ -13,6 +13,46 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 		setInputValues({ ...inputValues, [id]: value });
 	}
 
+	function handleAddInputs(e) {
+		const className = e.target.className;
+
+		if (className === 'education') {
+			const education = inputValues.education;
+			const children = inputValues.education.children;
+			setInputValues({
+				...inputValues,
+				education: {
+					...education,
+					children: [
+						...children,
+						{
+							schoolName: '',
+							studyCertification: '',
+							studyDate: '',
+						},
+					],
+				},
+			});
+		} else {
+			const experience = inputValues.experience;
+			const children = inputValues.experience.children;
+			setInputValues({
+				...inputValues,
+				experience: {
+					...experience,
+					children: [
+						...children,
+						{
+							schoolName: '',
+							studyCertification: '',
+							studyDate: '',
+						},
+					],
+				},
+			});
+		}
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		setPage(1);
@@ -27,16 +67,19 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 						dataInfo={elementsInfo.generalInfo}
 						onChange={handleInput}
 						inputValues={inputValues}
+						onClick={handleAddInputs}
 					/>
 					<Education
 						dataInfo={elementsInfo.education}
 						onChange={handleInput}
 						inputValues={inputValues}
+						onClick={handleAddInputs}
 					/>
 					<Experience
 						dataInfo={elementsInfo.work}
 						onChange={handleInput}
 						inputValues={inputValues}
+						onClick={handleAddInputs}
 					/>
 					<Button
 						id="submit"
