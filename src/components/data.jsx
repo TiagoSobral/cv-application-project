@@ -23,6 +23,7 @@ export let cvData = {
 				jobTitle: '',
 				workDateStart: '',
 				workDateEnd: '',
+				description: '',
 			},
 		],
 	},
@@ -45,6 +46,7 @@ export const dataElementGeneration = {
 		{ title: 'Title: ', id: 'jobTitle' },
 		{ title: 'From: ', id: 'workDateStart' },
 		{ title: 'To: ', id: 'workDateEnd' },
+		{ title: 'Description: ', id: 'jobDescription' },
 	],
 };
 
