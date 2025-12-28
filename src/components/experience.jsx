@@ -11,27 +11,15 @@ export default function Experience({
 	return (
 		<fieldset className="experience">
 			<Header className="title" titleText="Work Experience" />
-			<GroupInputFields
-				dataInfo={dataInfo}
-				onChange={onChange}
-				inputValues={inputValues}
-				className="experience"
-			/>
-			<JobDescription onChange={onChange} />
-			<Button value="Add" onClick={onClick} className="education" />
+			{inputValues.experience.children.map(() => (
+				<GroupInputFields
+					dataInfo={dataInfo}
+					onChange={onChange}
+					inputValues={inputValues}
+					className="experience"
+				/>
+			))}
+			<Button value="Add" onClick={onClick} className="experience" />
 		</fieldset>
-	);
-}
-
-function JobDescription({ onChange }) {
-	return (
-		<p>
-			<label htmlFor="jobDescription">Description: </label>
-			<textarea
-				name="jobDescription"
-				id="jobDescription"
-				onChange={onChange}
-			></textarea>
-		</p>
 	);
 }

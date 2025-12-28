@@ -20,6 +20,19 @@ function Input({
 	);
 }
 
+function JobDescription({ onChange }) {
+	return (
+		<p>
+			<label htmlFor="jobDescription">Description: </label>
+			<textarea
+				name="jobDescription"
+				id="jobDescription"
+				onChange={onChange}
+			></textarea>
+		</p>
+	);
+}
+
 export default function GroupInputFields({
 	dataInfo,
 	onChange,
@@ -46,16 +59,20 @@ export default function GroupInputFields({
 
 	return (
 		<div className="inputs">
-			{dataInfo.map((value) => (
-				<Input
-					type={findType(value.id)}
-					id={value.id}
-					text={value.title}
-					onChange={onChange}
-					inputValues={inputValues}
-					className={className}
-				/>
-			))}
+			{dataInfo.map((value) =>
+				value.id === 'jobDescription' ? (
+					<JobDescription onChange={onChange} />
+				) : (
+					<Input
+						type={findType(value.id)}
+						id={value.id}
+						text={value.title}
+						onChange={onChange}
+						inputValues={inputValues}
+						className={className}
+					/>
+				)
+			)}
 		</div>
 	);
 }
