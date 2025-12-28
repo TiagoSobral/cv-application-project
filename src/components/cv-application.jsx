@@ -26,6 +26,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 					children: [
 						...children,
 						{
+							id: crypto.randomUUID(),
 							schoolName: '',
 							studyCertification: '',
 							studyDate: '',
@@ -43,6 +44,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 					children: [
 						...children,
 						{
+							id: crypto.randomUUID(),
 							schoolName: '',
 							studyCertification: '',
 							studyDate: '',

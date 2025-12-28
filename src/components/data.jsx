@@ -8,6 +8,7 @@ export let cvData = {
 	education: {
 		children: [
 			{
+				id: crypto.randomUUID(),
 				schoolName: '',
 				studyCertification: '',
 				studyDate: '',
@@ -17,6 +18,7 @@ export let cvData = {
 	experience: {
 		children: [
 			{
+				id: crypto.randomUUID(),
 				companyName: '',
 				jobTitle: '',
 				workDateStart: '',
