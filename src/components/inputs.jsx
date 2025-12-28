@@ -44,14 +44,18 @@ export default function GroupInputFields({
 		}
 	}
 
-	return dataInfo.map((value) => (
-		<Input
-			type={findType(value.id)}
-			id={value.id}
-			text={value.title}
-			onChange={onChange}
-			inputValues={inputValues}
-			className={className}
-		/>
-	));
+	return (
+		<div className="inputs">
+			{dataInfo.map((value) => (
+				<Input
+					type={findType(value.id)}
+					id={value.id}
+					text={value.title}
+					onChange={onChange}
+					inputValues={inputValues}
+					className={className}
+				/>
+			))}
+		</div>
+	);
 }
