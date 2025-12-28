@@ -11,12 +11,15 @@ export default function Education({
 	return (
 		<fieldset className="education">
 			<Header className="title" titleText="Educational Experience" />
-			<GroupInputFields
-				dataInfo={dataInfo}
-				onChange={onChange}
-				inputValues={inputValues}
-				className="education"
-			/>
+			{inputValues.education.children.map((inputsGroup) => (
+				<GroupInputFields
+					dataInfo={dataInfo}
+					onChange={onChange}
+					inputValues={inputValues}
+					className="education"
+					key={inputsGroup.id}
+				/>
+			))}
 			<Button value="Add" onClick={onClick} className="education" />
 		</fieldset>
 	);
