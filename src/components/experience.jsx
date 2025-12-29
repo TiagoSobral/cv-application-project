@@ -2,18 +2,12 @@ import GroupInputFields from './inputs';
 import { Header } from './cv-application';
 import Button from './buttons';
 
-export default function Experience({
-  dataInfo,
-  onChange,
-  inputValues,
-  onClick,
-}) {
+export default function Experience({ onChange, inputValues, onClick }) {
   return (
     <fieldset className="experience">
       <Header className="title" titleText="Work Experience" />
       {inputValues.experience.children.map((inputsGroup) => (
         <GroupInputFields
-          dataInfo={dataInfo}
           onChange={onChange}
           inputValues={inputValues}
           className="experience"

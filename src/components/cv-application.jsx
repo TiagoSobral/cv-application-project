@@ -1,12 +1,9 @@
-import { dataElementGeneration } from './data';
 import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
 
 function CvApplication({ inputValues, setInputValues, setPage }) {
-  const elementsInfo = dataElementGeneration;
-
   function handleInput(e) {
     const className = e.target.className;
     const id = e.target.id;
@@ -101,19 +98,16 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
       <main>
         <form className="application">
           <PersonalInformation
-            dataInfo={elementsInfo.generalInfo}
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
           />
           <Education
-            dataInfo={elementsInfo.education}
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
           />
           <Experience
-            dataInfo={elementsInfo.work}
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}

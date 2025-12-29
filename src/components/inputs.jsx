@@ -1,3 +1,5 @@
+import { dataElementGeneration } from './data';
+
 function Input({
   type = 'text',
   id,
@@ -33,12 +35,8 @@ function JobDescription({ onChange }) {
   );
 }
 
-export default function GroupInputFields({
-  dataInfo,
-  onChange,
-  inputValues,
-  className,
-}) {
+export default function GroupInputFields({ className, inputValues, onChange }) {
+  const inputInfo = dataElementGeneration[className];
   // helper function that returns the type of input correspondent to the id received.
   function findType(id) {
     switch (id) {
@@ -59,7 +57,7 @@ export default function GroupInputFields({
 
   return (
     <div className="inputs">
-      {dataInfo.map((value) =>
+      {inputInfo.map((value) =>
         value.id === 'jobDescription' ? (
           <JobDescription onChange={onChange} />
         ) : (
