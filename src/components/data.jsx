@@ -30,7 +30,7 @@ export let cvData = {
 };
 
 export const dataElementGeneration = {
-  generalInfo: [
+  personalInfo: [
     { title: 'First Name: ', id: 'firstName' },
     { title: 'Last Name: ', id: 'lastName' },
     { title: 'Email: ', id: 'email' },
@@ -38,10 +38,13 @@ export const dataElementGeneration = {
   ],
   education: [
     { title: 'School: ', id: 'schoolName' },
-    { title: 'Certification: ', id: 'studyCertification' },
+    {
+      title: 'Certification: ',
+      id: 'studyCertification',
+    },
     { title: 'Year: ', id: 'studyDate' },
   ],
-  work: [
+  experience: [
     { title: 'Employer: ', id: 'companyName' },
     { title: 'Title: ', id: 'jobTitle' },
     { title: 'From: ', id: 'workDateStart' },
