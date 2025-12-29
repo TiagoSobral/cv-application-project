@@ -9,6 +9,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     const className = e.target.className;
     const id = e.target.id;
     const value = e.target.value;
+    const dataKey = e.target.dataset.key;
 
     switch (className) {
       case 'personalInfo': {
@@ -26,7 +27,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
           ...inputValues,
           education: {
             ...education,
-            children: updateChildrenValues(eduChildren, id, value),
+            children: updateChildrenValues(eduChildren, id, value, dataKey),
           },
         });
         break;
@@ -38,7 +39,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
           ...inputValues,
           experience: {
             ...experience,
-            children: updateChildrenValues(expChildren, id, value),
+            children: updateChildrenValues(expChildren, id, value, dataKey),
           },
         });
         break;
@@ -116,10 +117,9 @@ function Header({ className, titleText }) {
   return <h1 className={className}>{titleText}</h1>;
 }
 
-function updateChildrenValues(childrenArray, id, value) {
-  let length = childrenArray.length;
-  return childrenArray.map((element, index) =>
-    index == length - 1 ? { ...element, [id]: value } : element
+function updateChildrenValues(childrenArray, id, value, dataKey) {
+  return childrenArray.map((element) =>
+    element.id == dataKey ? { ...element, [id]: value } : element
   );
 }
 
