@@ -1,4 +1,4 @@
-export let cvData = {
+let cvData = {
   personalInfo: {
     firstName: '',
     lastName: '',
@@ -29,7 +29,23 @@ export let cvData = {
   },
 };
 
-export const dataElementGeneration = {
+const educationChild = {
+  id: '',
+  schoolName: '',
+  studyCertification: '',
+  studyDate: '',
+};
+
+const experienceChild = {
+  id: crypto.randomUUID(),
+  companyName: '',
+  jobTitle: '',
+  workDateStart: '',
+  workDateEnd: '',
+  description: '',
+};
+
+const dataElementGeneration = {
   personalInfo: [
     { title: 'First Name: ', id: 'firstName' },
     { title: 'Last Name: ', id: 'lastName' },
@@ -52,3 +68,5 @@ export const dataElementGeneration = {
     { title: 'Description: ', id: 'jobDescription' },
   ],
 };
+
+export { cvData, educationChild, experienceChild, dataElementGeneration };

@@ -2,6 +2,7 @@ import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
+import { educationChild, experienceChild } from './data';
 
 function CvApplication({ inputValues, setInputValues, setPage }) {
   function handleInput(e) {
@@ -47,6 +48,8 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 
   function handleAddInputs(e) {
     const className = e.target.className;
+    const newEducation = { ...educationChild, id: crypto.randomUUID() };
+    const newExperience = { ...experienceChild, id: crypto.randomUUID() };
 
     if (className === 'education') {
       const education = inputValues.education;
@@ -55,15 +58,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
         ...inputValues,
         education: {
           ...education,
-          children: [
-            ...children,
-            {
-              id: crypto.randomUUID(),
-              schoolName: '',
-              studyCertification: '',
-              studyDate: '',
-            },
-          ],
+          children: [...children, newEducation],
         },
       });
     } else {
@@ -73,15 +68,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
         ...inputValues,
         experience: {
           ...experience,
-          children: [
-            ...children,
-            {
-              id: crypto.randomUUID(),
-              schoolName: '',
-              studyCertification: '',
-              studyDate: '',
-            },
-          ],
+          children: [...children, newExperience],
         },
       });
     }
