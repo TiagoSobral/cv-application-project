@@ -12,6 +12,7 @@ export default function Education({ onChange, inputValues, onClick }) {
           inputValues={inputValues}
           className="education"
           key={inputsGroup.id}
+          groupId={inputsGroup.id}
         />
       ))}
       <Button value="Add" onClick={onClick} className="education" />

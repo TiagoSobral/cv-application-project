@@ -1,18 +1,14 @@
 import GroupInputFields from './inputs';
 import { Header } from './cv-application';
 
-export default function PersonalInformation({
-  dataInfo,
-  onChange,
-  inputValues,
-}) {
+export default function PersonalInformation({ inputValues, onChange }) {
   return (
-    <fieldset className="personalInformation">
+    <fieldset className="personalInfo">
       <Header className="title" titleText="Personal Information" />
       <GroupInputFields
-        dataInfo={dataInfo}
         onChange={onChange}
         inputValues={inputValues}
+        className="personalInfo"
       />
     </fieldset>
   );

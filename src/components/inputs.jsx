@@ -4,9 +4,10 @@ function Input({
   type = 'text',
   id,
   text,
-  onChange,
   inputValues,
   className = 'personalInfo',
+  groupId,
+  onChange,
 }) {
   return (
     <p>
@@ -17,25 +18,32 @@ function Input({
         onChange={onChange}
         value={inputValues[id]}
         className={className}
+        data-key={groupId}
       />
     </p>
   );
 }
 
-function JobDescription({ onChange }) {
+function JobDescription({ groupId, onChange }) {
   return (
     <p>
       <label htmlFor="jobDescription">Description: </label>
       <textarea
         name="jobDescription"
         id="jobDescription"
+        data-key={groupId}
         onChange={onChange}
       ></textarea>
     </p>
   );
 }
 
-export default function GroupInputFields({ className, inputValues, onChange }) {
+export default function GroupInputFields({
+  className,
+  inputValues,
+  groupId,
+  onChange,
+}) {
   const inputInfo = dataElementGeneration[className];
   // helper function that returns the type of input correspondent to the id received.
   function findType(id) {
@@ -68,6 +76,7 @@ export default function GroupInputFields({ className, inputValues, onChange }) {
             onChange={onChange}
             inputValues={inputValues}
             className={className}
+            groupId={groupId}
           />
         )
       )}
