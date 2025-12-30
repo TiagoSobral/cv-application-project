@@ -1,6 +1,7 @@
 import '../styles/cv-rendered.css';
 import '../index.css';
 import Button from './buttons.jsx';
+import { format } from 'date-fns';
 
 export default function CvRendered({ form, changePage }) {
   const personalInfo = form.personalInfo;
@@ -59,7 +60,6 @@ function RenderedEducation({ children }) {
           <li>{child.studyDate}</li>
         </ul>
       ))}
-      ;
     </section>
   );
 }
@@ -72,7 +72,8 @@ function RenderedWork({ children }) {
         <ul className="job" key={child.id}>
           <li>{child.jobTitle}</li>
           <li>
-            {child.workDateStart} {child.workDateEnd}
+            {format(new Date(child.workDateStart), 'MMM-yyyy')} {' - '}
+            {format(new Date(child.workDateEnd), 'MMM-yyyy')}
           </li>
           <li>{child.companyName}</li>
           <li>{child.description}</li>
