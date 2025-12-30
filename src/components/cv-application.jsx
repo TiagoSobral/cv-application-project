@@ -80,6 +80,21 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     setPage(1);
   }
 
+  function handleDelete(e, inputValues, setInputValues) {
+    const deleteId = e.target.dataset.id;
+    const deleteClass = e.target.className;
+    const section = inputValues[deleteClass];
+    const sectionChildren = section.children;
+
+    setInputValues({
+      ...inputValues,
+      [deleteClass]: {
+        ...section,
+        children: [deleteChild(sectionChildren, deleteId)],
+      },
+    });
+  }
+
   return (
     <>
       <Header className="title" titleText="CV Application" />
@@ -94,11 +109,13 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
+            onDelete={handleDelete}
           />
           <Experience
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
+            onDelete={handleDelete}
           />
           <Button
             id="submit"
@@ -121,6 +138,10 @@ function updateChildrenValues(childrenArray, id, value, dataKey) {
   return childrenArray.map((element) =>
     element.id == dataKey ? { ...element, [id]: value } : element
   );
+}
+
+function deleteChild(array, id) {
+  return array.filter((child) => child.id != id);
 }
 
 export { CvApplication, Header };

@@ -2,7 +2,12 @@ import GroupInputFields from './inputs';
 import { Header } from './cv-application';
 import Button from './buttons';
 
-export default function Education({ onChange, inputValues, onClick }) {
+export default function Education({
+  onChange,
+  inputValues,
+  onClick,
+  onDelete,
+}) {
   return (
     <fieldset className="education">
       <Header className="title" titleText="Educational Experience" />
@@ -13,6 +18,7 @@ export default function Education({ onChange, inputValues, onClick }) {
           className="education"
           key={inputsGroup.id}
           groupId={inputsGroup.id}
+          onDelete={onDelete}
         />
       ))}
       <Button value="Add" onClick={onClick} className="education" />

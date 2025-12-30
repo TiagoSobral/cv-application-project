@@ -1,4 +1,5 @@
 import { dataElementGeneration } from './data';
+import Button from './buttons';
 
 function Input({
   type = 'text',
@@ -43,6 +44,7 @@ export default function GroupInputFields({
   inputValues,
   groupId,
   onChange,
+  onDelete,
 }) {
   const inputInfo = dataElementGeneration[className];
   // helper function that returns the type of input correspondent to the id received.
@@ -79,6 +81,14 @@ export default function GroupInputFields({
             groupId={groupId}
           />
         )
+      )}
+      {className != 'personalInfo' && (
+        <Button
+          text="Delete"
+          className={className}
+          id={groupId}
+          onClick={onDelete}
+        />
       )}
     </div>
   );
