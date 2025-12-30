@@ -33,7 +33,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
         break;
       }
       case 'experience': {
-        const experience = inputValues.education;
+        const experience = inputValues.experience;
         const expChildren = experience.children;
         setInputValues({
           ...inputValues,
