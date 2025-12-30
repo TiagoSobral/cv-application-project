@@ -2,33 +2,25 @@ import '../styles/cv-rendered.css';
 import '../index.css';
 import Button from './buttons.jsx';
 
-export default function CvRendered({ form, changePage, setValues }) {
+export default function CvRendered({ form, changePage }) {
+  const personalInfo = form.personalInfo;
+  const education = form.education.children;
+  const experience = form.experience.children;
+
   function handleEdit() {
     changePage(0);
-    setValues(form);
   }
 
   return (
     <>
       <AboutMe
-        firstName={form.firstName}
-        LastName={form.lastName}
-        email={form.email}
-        phoneNumber={form.phoneNumber}
+        firstName={personalInfo.firstName}
+        LastName={personalInfo.lastName}
+        email={personalInfo.email}
+        phoneNumber={personalInfo.phoneNumber}
       />
-      <RenderedEducation
-        title="Education"
-        schoolName={form.schoolName}
-        date={form.studyDate}
-        type={form.studyCertification}
-      />
-      <RenderedWork
-        position={form.jobTitle}
-        startDate={form.workDateStart}
-        endDate={form.workDateEnd}
-        companyName={form.companyName}
-        description={form.jobDescription}
-      />
+      <RenderedEducation children={education} />
+      <RenderedWork children={experience} />
       <Button className="aboutBtn" value="edit" onClick={handleEdit} />
     </>
   );
@@ -54,39 +46,38 @@ function AboutMe({ firstName, LastName, email, phoneNumber }) {
   );
 }
 
-function RenderedEducation({ title, schoolName, date, type }) {
+function RenderedEducation({ children }) {
   return (
-    <>
-      <h1>{title}</h1>
-      <ul className="School">
-        <li>
-          <b>{schoolName}</b>
-        </li>
-        <li>{type}</li>
-        <li>{date}</li>
-      </ul>
-    </>
+    <section className="education">
+      <h1>Education</h1>
+      {children.map((child) => (
+        <ul className="school" key={child.id}>
+          <li>
+            <b>{child.schoolName}</b>
+          </li>
+          <li>{child.studyCertification}</li>
+          <li>{child.studyDate}</li>
+        </ul>
+      ))}
+      ;
+    </section>
   );
 }
 
-function RenderedWork({
-  position,
-  startDate,
-  endDate,
-  companyName,
-  description,
-}) {
+function RenderedWork({ children }) {
   return (
-    <>
+    <section className="experience">
       <h1>Work Experience</h1>
-      <ul>
-        <li>{position}</li>
-        <li>
-          {startDate} {endDate}
-        </li>
-        <li>{companyName}</li>
-        <li>{description}</li>
-      </ul>
-    </>
+      {children.map((child) => (
+        <ul className="job" key={child.id}>
+          <li>{child.jobTitle}</li>
+          <li>
+            {child.workDateStart} {child.workDateEnd}
+          </li>
+          <li>{child.companyName}</li>
+          <li>{child.description}</li>
+        </ul>
+      ))}
+    </section>
   );
 }
