@@ -13,15 +13,15 @@ export default function Experience({
       <Header className="title" titleText="Work Experience" />
       {inputValues.experience.children.map((inputsGroup) => (
         <GroupInputFields
-          onChange={onChange}
-          inputValues={inputValues}
-          className="experience"
           key={inputsGroup.id}
+          className="experience"
+          groupInfo={inputsGroup}
           groupId={inputsGroup.id}
+          onChange={onChange}
           onDelete={onDelete}
         />
       ))}
-      <Button value="Add" onClick={onClick} className="experience" />
+      <Button value="Add" text="Add" onClick={onClick} className="experience" />
     </fieldset>
   );
 }

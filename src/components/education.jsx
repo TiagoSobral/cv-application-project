@@ -13,15 +13,15 @@ export default function Education({
       <Header className="title" titleText="Educational Experience" />
       {inputValues.education.children.map((inputsGroup) => (
         <GroupInputFields
-          onChange={onChange}
-          inputValues={inputValues}
-          className="education"
           key={inputsGroup.id}
+          className="education"
+          groupInfo={inputsGroup}
           groupId={inputsGroup.id}
+          onChange={onChange}
           onDelete={onDelete}
         />
       ))}
-      <Button value="Add" onClick={onClick} className="education" />
+      <Button value="Add" text="Add" onClick={onClick} className="education" />
     </fieldset>
   );
 }
