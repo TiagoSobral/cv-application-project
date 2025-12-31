@@ -3,14 +3,10 @@ import '../index.css';
 import Button from './buttons.jsx';
 import { format } from 'date-fns';
 
-export default function CvRendered({ form, changePage }) {
+export default function CvRendered({ form, onEdit }) {
   const personalInfo = form.personalInfo;
   const education = form.education.children;
   const experience = form.experience.children;
-
-  function handleEdit() {
-    changePage(0);
-  }
 
   return (
     <>
@@ -22,7 +18,7 @@ export default function CvRendered({ form, changePage }) {
       />
       <RenderedEducation children={education} />
       <RenderedWork children={experience} />
-      <Button className="aboutBtn" value="edit" onClick={handleEdit} />
+      <Button className="aboutBtn" value="edit" onClick={onEdit} />
     </>
   );
 }
