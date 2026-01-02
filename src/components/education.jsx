@@ -10,7 +10,7 @@ export default function Education({
 }) {
   return (
     <fieldset className="education">
-      <Header className="title" titleText="Educational Experience" />
+      <Header className="title" titleText="Education" />
       {inputValues.education.children.map((inputsGroup) => (
         <GroupInputFields
           key={inputsGroup.id}
