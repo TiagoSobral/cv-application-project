@@ -127,10 +127,12 @@ footer {
 
 .fluidTop {
   transform: translate(50rem, 10rem) rotate(90deg);
+  filter: drop-shadow(-250px 0px 0px #1010f2da);
 }
 
 .fluidBottom {
   transform: translateY(-20rem) translateX(-30rem) rotate(195deg);
+  filter: drop-shadow(-680px -100px 0px #531be154);
 }
 
 /* Outline */
