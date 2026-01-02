@@ -1,18 +1,50 @@
 #root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-button[value='edit'] {
-	width: 3rem;
-	height: 1.7rem;
-	background-image: url(../svgs/edit.svg);
-	background-size: 40%;
-	background-repeat: no-repeat;
-	background-position: center;
+.application {
+  display: grid;
+  grid-template-columns: minmax(350px, 800px);
+  /* max-width: 100rem; */
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
 }
 
 button[value='submit'] {
-	padding: 0.7rem 2rem;
+  padding: 0.7rem 2rem;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+}
+
+.inputs button {
+  position: absolute;
+  top: 38px;
+  right: 10px;
+  background-image: url(../svgs/delete.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+fieldset button {
+  width: 5rem;
+  height: 2.5rem;
+  align-self: center;
 }
