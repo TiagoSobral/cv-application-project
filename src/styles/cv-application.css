@@ -2,7 +2,8 @@
   width: 100%;
 }
 
-#root > header {
+#root > header,
+footer {
   background-color: #e6e6fa;
   width: 100%;
   min-height: 8rem;
@@ -22,12 +23,16 @@
 main {
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .application {
   display: grid;
   grid-template-columns: minmax(350px, 800px);
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 p {
@@ -90,4 +95,57 @@ fieldset button {
 button[value='submit'] {
   padding: 1rem 3rem;
   margin-right: calc(2rem - 12px);
+}
+
+footer {
+  gap: 2rem;
+}
+
+footer h1 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Box Shadow*/
+
+#root > header {
+  box-shadow: 0.1rem 0.1rem 0.4rem 0.1rem rgba(134, 116, 161, 0.299);
+}
+
+footer {
+  box-shadow: -0.1rem -0.1rem 0.4rem 0.1rem rgba(134, 116, 161, 0.299);
+}
+
+/* Images */
+
+.fluidTop,
+.fluidBottom {
+  position: absolute;
+  opacity: 80%;
+  z-index: 1;
+}
+
+.fluidTop {
+  transform: translate(50rem, 10rem) rotate(90deg);
+}
+
+.fluidBottom {
+  transform: translateY(-20rem) translateX(-30rem) rotate(195deg);
+}
+
+/* Outline */
+
+input:focus {
+  outline-color: #6161d7;
+}
+
+/* gitHub icon */
+
+.gitHub {
+  background-image: url(../assets/github.svg);
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #e6e6fa;
 }
