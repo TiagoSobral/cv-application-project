@@ -17,6 +17,7 @@ function Input({ inputInfo, className = 'personalInfo', groupId, onChange }) {
         className={className}
         data-key={groupId}
         onChange={onChange}
+        required
       />
     </p>
   );
@@ -61,7 +62,7 @@ export default function GroupInputFields({
       })}
       {className != 'personalInfo' && (
         <Button
-          text="Delete"
+          value="delete"
           className={className}
           id={groupId}
           onClick={onDelete}
