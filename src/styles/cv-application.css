@@ -14,10 +14,12 @@ footer {
 
 #root > header .title {
   margin: 0;
+  font-size: 40px;
 }
 
 .application .title {
-  padding-left: 12px;
+  margin-left: 12px;
+  font-size: 34px;
 }
 
 main {
@@ -39,10 +41,6 @@ p {
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
-}
-
-input {
-  padding: 0.2rem;
 }
 
 .inputs {
@@ -108,7 +106,9 @@ footer h1 {
 
 /* Box Shadow*/
 
-#root > header {
+#root > header,
+main button,
+textarea {
   box-shadow: 0.1rem 0.1rem 0.4rem 0.1rem rgba(134, 116, 161, 0.299);
 }
 
@@ -148,4 +148,21 @@ input:focus {
   background-size: contain;
   background-repeat: no-repeat;
   background-color: #e6e6fa;
+}
+
+/* Labels */
+
+label {
+  font-weight: 600;
+}
+
+/* Input borders */
+
+input {
+  font-size: 15px;
+  padding: 0.2rem;
+  border-color: #00000097;
+  border-width: 0.1rem;
+  border-style: ridge;
+  border-radius: 5px;
 }
