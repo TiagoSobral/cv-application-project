@@ -1,5 +1,25 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
+}
+
+#root > header {
+  background-color: #e6e6fa;
+  width: 100%;
+  min-height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root > header .title {
+  margin: 0;
+}
+
+.application .title {
+  padding-left: 12px;
+}
+
+main {
   margin: 0 auto;
   padding: 2rem;
 }
@@ -7,22 +27,17 @@
 .application {
   display: grid;
   grid-template-columns: minmax(350px, 800px);
-  /* max-width: 100rem; */
-}
-
-.submit {
-  display: flex;
   justify-content: center;
-}
-
-button[value='submit'] {
-  padding: 0.7rem 2rem;
 }
 
 p {
   display: flex;
   flex-direction: column;
-  max-width: 80%;
+  padding: 0 1rem;
+}
+
+input {
+  padding: 0.2rem;
 }
 
 .inputs {
@@ -33,18 +48,46 @@ p {
 
 .inputs button {
   position: absolute;
-  top: 38px;
-  right: 10px;
+  right: 20px;
   background-image: url(../svgs/delete.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   width: 1.5rem;
   height: 1.5rem;
+  display: none;
+}
+
+button[visible=''] {
+  display: block;
+}
+
+/* Description */
+
+.experience .inputs p:last-of-type {
+  grid-column: 1 / 3;
+}
+
+#jobDescription {
+  resize: none;
+  max-width: 99%;
+  height: 100px;
+  justify-self: center;
 }
 
 fieldset button {
   width: 5rem;
   height: 2.5rem;
-  align-self: center;
+  margin-left: 15px;
+}
+
+.submit {
+  display: flex;
+  justify-content: end;
+  margin: 0.5rem;
+}
+
+button[value='submit'] {
+  padding: 1rem 3rem;
+  margin-right: calc(2rem - 12px);
 }
