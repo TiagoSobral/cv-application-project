@@ -3,6 +3,8 @@ import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
 import { educationChild, experienceChild } from './data';
+import fluid from '../assets/fluid.png';
+import fluidtwo from '../assets/fluid-two.png';
 
 function CvApplication({ inputValues, setInputValues, setPage }) {
   function handleInput(e) {
@@ -97,7 +99,8 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 
   return (
     <>
-      <Header className="title" titleText="CV Application" />
+      <img src={fluidtwo} className="fluidTop" />
+      <Header className="title" titleText="Resume Generator" />
       <main>
         <form className="application">
           <PersonalInformation
@@ -117,21 +120,34 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onClick={handleAddInputs}
             onDelete={handleDelete}
           />
-          <Button
-            id="submit"
-            type="submit"
-            value="submit"
-            text="Submit"
-            onClick={handleSubmit}
-          />
+          <div className="submit">
+            <Button
+              id="submit"
+              type="submit"
+              value="submit"
+              text="Submit"
+              onClick={handleSubmit}
+            />
+          </div>
         </form>
       </main>
+      <footer>
+        <h1>Tiago Sobral</h1>
+        <button className="gitHub">
+          <a href=""></a>
+        </button>
+      </footer>
+      <img className="fluidBottom" src={fluid} />
     </>
   );
 }
 
 function Header({ className, titleText }) {
-  return <h1 className={className}>{titleText}</h1>;
+  return (
+    <header>
+      <h1 className={className}>{titleText}</h1>
+    </header>
+  );
 }
 
 function updateChildrenValues(childrenArray, id, value, dataKey) {
