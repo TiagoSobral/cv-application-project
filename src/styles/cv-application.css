@@ -1,10 +1,12 @@
-@import url(./media-queries.css);
+@import url(./queries-application.css);
 
 #root {
   width: 100%;
   position: relative;
   overflow: hidden;
 }
+
+/* ------------------- HEADER STYLING --------------------- */
 
 #root > header,
 footer {
@@ -13,11 +15,15 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(213, 197, 255);
+  box-shadow: 0.1rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.413);
 }
 
 #root > header .title {
   margin: 1rem;
+  padding-bottom: 2rem;
   font-size: 40px;
+  text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.262);
 }
 
 .application .title {
@@ -25,18 +31,21 @@ footer {
   font-size: 34px;
 }
 
+/* ------------------- MAIN AREA STYLING --------------------- */
+
 main {
-  margin: 0 auto;
-  padding: 2rem;
   position: relative;
   overflow: hidden;
 }
 
 .application {
   display: grid;
-  grid-template-columns: minmax(350px, 800px);
-  justify-content: center;
+  justify-items: center;
   position: relative;
+}
+
+fieldset {
+  display: grid;
 }
 
 p {
@@ -60,7 +69,16 @@ p {
   height: 1.5rem;
 }
 
-/* DESCRIPTION */
+input {
+  padding: 0.2rem;
+  border-color: #00000097;
+  border-width: 0.1rem;
+  border-style: ridge;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+}
+
+/* ------------------- TEXTAREA - JOB DESCRIPTION --------------------- */
 
 #jobDescription {
   resize: none;
@@ -83,37 +101,80 @@ footer h1 {
   font-weight: 500;
 }
 
-/* BOX SHADOW */
-
-main button {
-  box-shadow: 0.1rem 0.1rem 0.4rem 0.1rem rgba(134, 116, 161, 0.299);
-}
-
-/* IMAGES */
+/* ------------------- IMAGES --------------------- */
 
 .fluidTop,
-.fluidBottom {
+.fluidTopLeft,
+.fluidTopRight {
   position: absolute;
-  opacity: 80%;
 }
 
-.fluidTop {
-  transform: translate(2rem, -36rem) rotate(360deg);
-  filter: drop-shadow(-250px 0px 0px #1010f2da);
+.fluidTop,
+.fluidTopLeft,
+.fluidTopRight {
+  filter: drop-shadow(250px -20px 1px #ffffff);
+  scale: 0.5;
 }
-
+/* 
 .fluidBottom {
-  transform: translateY(-17rem) translateX(-10rem) rotate(155deg);
-  filter: drop-shadow(-280px -100px 0px #531be154);
-}
+  opacity: 80%;
+} */
 
-/* OUTLINE */
+/* ------------------- OUTLINE --------------------- */
 
 input:focus {
   outline-color: #6161d7;
 }
 
-/* GIT HUB ICON */
+/* ------------------- LABELS --------------------- */
+
+label {
+  font-weight: 600;
+}
+
+/* ------------------- STACKING CONTEXT --------------------- */
+
+#root > header,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+main {
+  z-index: 4;
+}
+
+.fluidTop,
+.fluidTopLeft,
+.fluidTopRight {
+  z-index: 3;
+}
+
+.fluidBottom {
+  z-index: 1;
+}
+
+/* ------------------- BUTTONS --------------------- */
+
+button[value='delete'] {
+  position: absolute;
+  justify-self: end;
+  margin-top: 0.8rem;
+  margin-right: 20px;
+}
+
+.submit {
+  position: relative;
+}
+
+button[value='submit'] {
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+}
+
+main button {
+  box-shadow: 0.1rem 0.1rem 0.4rem 0.1rem rgba(134, 116, 161, 0.299);
+}
 
 .gitHub {
   background-image: url(../assets/github.svg);
@@ -122,56 +183,4 @@ input:focus {
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
-}
-
-/* Labels */
-
-label {
-  font-weight: 600;
-}
-
-/* Input borders */
-
-input {
-  padding: 0.2rem;
-  border-color: #00000097;
-  border-width: 0.1rem;
-  border-style: ridge;
-  border-radius: 5px;
-  padding-left: 0.5rem;
-}
-
-/* STACK */
-
-#root > header,
-main,
-footer {
-  position: relative;
-  z-index: 2;
-}
-
-.fluidBottom,
-.fluidTop {
-  z-index: 1;
-}
-
-/* DELETE BUTTON */
-button[value='delete'] {
-  position: absolute;
-  justify-self: end;
-  margin-top: 0.8rem;
-  margin-right: 20px;
-}
-
-/* SUBMIT BUTTON */
-
-.submit {
-  position: relative;
-  bottom: 30px;
-  right: 35px;
-}
-
-button[value='submit'] {
-  margin-top: 2rem;
-  padding: 1rem 3rem;
 }
