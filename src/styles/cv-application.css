@@ -16,7 +16,7 @@ footer {
 }
 
 #root > header .title {
-  margin: 0;
+  margin: 1rem;
   font-size: 40px;
 }
 
@@ -52,14 +52,12 @@ p {
 
 .inputs button {
   position: absolute;
-  right: 20px;
   background-image: url(../svgs/delete.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   width: 1.5rem;
   height: 1.5rem;
-  display: none;
 }
 
 button[visible=''] {
