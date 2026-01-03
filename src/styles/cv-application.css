@@ -60,10 +60,6 @@ p {
   height: 1.5rem;
 }
 
-button[visible=''] {
-  display: block;
-}
-
 /* DESCRIPTION */
 
 #jobDescription {
@@ -78,11 +74,6 @@ fieldset > button {
   height: 2.5rem;
 }
 
-button[value='submit'] {
-  margin-top: 2rem;
-  padding: 1rem 3rem;
-}
-
 footer {
   gap: 2rem;
 }
@@ -92,7 +83,7 @@ footer h1 {
   font-weight: 500;
 }
 
-/* Box Shadow*/
+/* BOX SHADOW */
 
 main button {
   box-shadow: 0.1rem 0.1rem 0.4rem 0.1rem rgba(134, 116, 161, 0.299);
@@ -162,4 +153,25 @@ footer {
 .fluidBottom,
 .fluidTop {
   z-index: 1;
+}
+
+/* DELETE BUTTON */
+button[value='delete'] {
+  position: absolute;
+  justify-self: end;
+  margin-top: 0.8rem;
+  margin-right: 20px;
+}
+
+/* SUBMIT BUTTON */
+
+.submit {
+  position: relative;
+  bottom: 30px;
+  right: 35px;
+}
+
+button[value='submit'] {
+  margin-top: 2rem;
+  padding: 1rem 3rem;
 }
