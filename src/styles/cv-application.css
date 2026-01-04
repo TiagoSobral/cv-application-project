@@ -15,7 +15,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(213, 197, 255);
+  background-color: rgb(181, 218, 255);
   box-shadow: 0.1rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.413);
 }
 
@@ -27,7 +27,6 @@ footer {
 }
 
 .application .title {
-  margin-left: 12px;
   font-size: 34px;
 }
 
@@ -36,6 +35,7 @@ footer {
 main {
   position: relative;
   overflow: hidden;
+  grid-auto-flow: column;
 }
 
 .application {
@@ -124,6 +124,7 @@ footer h1 {
 
 input:focus {
   outline-color: #6161d7;
+  outline-width: 0.01rem;
 }
 
 /* ------------------- LABELS --------------------- */

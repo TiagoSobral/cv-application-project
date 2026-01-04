@@ -1,4 +1,4 @@
-@media (max-width: 1480px) {
+@media (min-width: 800px) {
   fieldset {
     grid-template-columns: 0.5fr 1fr;
     width: 100%;
@@ -9,6 +9,7 @@
   }
 
   main {
+    max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
   }
@@ -25,6 +26,10 @@
     justify-self: end;
     bottom: 30px;
     right: 35px;
+  }
+
+  .application .title {
+    margin-left: 12px;
   }
 
   label,
@@ -50,7 +55,7 @@
   } */
 }
 
-@media (max-width: 530px) {
+@media (max-width: 800px) {
   fieldset {
     grid-template-columns: 1fr;
     width: 80%;
@@ -59,16 +64,27 @@
   .personalInfo .inputs,
   .education .inputs,
   .experience .inputs {
-    grid-template-columns: 300px;
-    grid-template-rows: repeat(3, 0.5fr);
+    grid-template-columns: repeat(2, 1fr);
     justify-content: center;
   }
-  .personalInfo,
-  .education,
-  .experience {
-    flex-direction: column;
+
+  button[value='Add'] {
+    margin-left: 16px;
+    grid-column: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  fieldset {
+    grid-template-columns: 1fr;
+    width: 80%;
+  }
+
+  .personalInfo .inputs,
+  .education .inputs,
+  .experience .inputs {
+    grid-template-columns: 1fr;
     justify-content: center;
-    align-items: center;
   }
 
   main {
@@ -77,6 +93,7 @@
   }
 
   button[value='Add'] {
+    position: relative;
     margin-left: 16px;
     grid-column: initial;
   }
@@ -92,6 +109,10 @@
     margin-bottom: 2rem;
   }
 
+  .application .title {
+    margin-left: 0px;
+  }
+
   h1 {
     text-align: center;
   }
@@ -102,13 +123,13 @@
   }
 
   .fluidTopLeft {
-    transform: translate(-35rem, -11rem) rotate(180deg);
+    transform: translate(-35rem, -12rem) rotate(180deg);
   }
   .fluidTopRight {
     transform: translate(70rem, -11rem) rotate(180deg);
   }
   .fluidTop {
-    transform: translate(2rem, -13rem) rotate(182deg);
+    transform: translate(3rem, -12rem) rotate(182deg);
   }
   /* .fluidBottom {
     bottom: 0px;
