@@ -78,6 +78,10 @@ input {
   padding-left: 0.5rem;
 }
 
+input[type='month'] {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 /* ------------------- TEXTAREA - JOB DESCRIPTION --------------------- */
 
 #jobDescription {
@@ -85,6 +89,9 @@ input {
   max-width: 99%;
   height: 100px;
   justify-self: center;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  padding: 0.5rem;
 }
 
 fieldset > button {
