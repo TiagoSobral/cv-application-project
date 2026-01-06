@@ -2,11 +2,16 @@ import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
-import { educationChild, experienceChild } from './data';
-import fluid from '../assets/fluid.png';
+import { cvData, educationChild, experienceChild } from './data';
+// import fluid from '../assets/fluid.png';
 import fluidtwo from '../assets/fluid-two.png';
+import { useState } from 'react';
 
 function CvApplication({ inputValues, setInputValues, setPage }) {
+  const [errorPerson, setErrorPerson] = useState(cvData.personalInfo);
+  const [errorEdu, setErrorEdu] = useState(cvData.education.children);
+  const [errorExp, setErrorExp] = useState(cvData.experience.children);
+
   function handleInput(e) {
     const className = e.target.className;
     const id = e.target.id;
@@ -77,9 +82,34 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     }
   }
 
+  /* returns the error message to each of their own error state */
+  function handleInvalid(e) {
+    let className = e.target.className;
+    let name = e.target.id;
+    let groupId = e.target.dataset.key;
+    let error = e.target.validationMessage;
+
+    switch (className) {
+      case 'personalInfo':
+        setErrorPerson({ ...errorPerson, [name]: error });
+        break;
+      case 'education':
+        setErrorEdu(updateChildrenValues(errorEdu, name, error, groupId));
+        break;
+      case 'experience':
+        setErrorExp(updateChildrenValues(errorExp, name, error, groupId));
+    }
+  }
+
   function handleSubmit(e) {
-    e.preventDefault();
-    setPage(1);
+    let personal = hasErrors(errorPerson);
+    let edu = hasErrors(errorEdu);
+    let exp = hasErrors(errorExp);
+
+    if (personal && edu && exp) {
+      e.preventDefault();
+      setPage(1);
+    }
   }
 
   function handleDelete(e, inputValues, setInputValues) {
@@ -99,7 +129,9 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 
   return (
     <>
+      <img src={fluidtwo} className="fluidTopRight" />
       <img src={fluidtwo} className="fluidTop" />
+      <img src={fluidtwo} className="fluidTopLeft" />
       <Header className="title" titleText="Resume Generator" />
       <main>
         <form className="application">
@@ -107,18 +139,21 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
+            onInvalid={handleInvalid}
           />
           <Education
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
             onDelete={handleDelete}
+            onInvalid={handleInvalid}
           />
           <Experience
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
             onDelete={handleDelete}
+            onInvalid={handleInvalid}
           />
           <div className="submit">
             <Button
@@ -136,8 +171,8 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
         <button className="gitHub">
           <a href=""></a>
         </button>
+        {/* <img className="fluidBottom" src={fluid} /> */}
       </footer>
-      <img className="fluidBottom" src={fluid} />
     </>
   );
 }
@@ -158,6 +193,15 @@ function updateChildrenValues(childrenArray, id, value, dataKey) {
 
 function deleteChild(array, id) {
   return array.filter((child) => child.id != id);
+}
+
+function hasErrors(value) {
+  let errors;
+  Array.isArray(value)
+    ? (errors = value.map((child) => Object.values(child)))
+    : (errors = Object.values(value));
+  let foundError = errors.filter((value) => value != '');
+  return foundError.length > 0 ? true : false;
 }
 
 export { CvApplication, Header };

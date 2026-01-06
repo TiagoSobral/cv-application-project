@@ -1,11 +1,18 @@
 import { dataElementGeneration } from './data';
 import Button from './buttons';
 
-function Input({ inputInfo, className = 'personalInfo', groupId, onChange }) {
+function Input({
+  inputInfo,
+  className = 'personalInfo',
+  groupId,
+  onChange,
+  onInvalid,
+}) {
   const valueId = inputInfo[0];
   const inputValue = inputInfo[1];
   const labelText = dataElementGeneration[className][valueId];
   const inputType = findType(valueId);
+  const example = placeHolder(valueId);
 
   return (
     <p>
@@ -17,21 +24,27 @@ function Input({ inputInfo, className = 'personalInfo', groupId, onChange }) {
         className={className}
         data-key={groupId}
         onChange={onChange}
+        placeholder={example}
+        onInvalid={onInvalid}
         required
       />
     </p>
   );
 }
 
-function JobDescription({ groupId, onChange }) {
+function JobDescription({ groupId, inputValue, onChange, onInvalid }) {
   return (
     <p>
       <label htmlFor="jobDescription">Description: </label>
       <textarea
         name="jobDescription"
         id="jobDescription"
+        className="experience"
         data-key={groupId}
         onChange={onChange}
+        onInvalid={onInvalid}
+        defaultValue={inputValue}
+        required
       ></textarea>
     </p>
   );
@@ -43,13 +56,21 @@ export default function GroupInputFields({
   groupId,
   onChange,
   onDelete,
+  onInvalid,
 }) {
   return (
     <div className="inputs">
       {Object.entries(groupInfo).map((value) => {
         const valueId = value[0];
         if (valueId === 'description')
-          return <JobDescription onChange={onChange} groupId={groupId} />;
+          return (
+            <JobDescription
+              onChange={onChange}
+              groupId={groupId}
+              inputValue={value[1]}
+              onInvalid={onInvalid}
+            />
+          );
         if (valueId != 'id')
           return (
             <Input
@@ -57,6 +78,7 @@ export default function GroupInputFields({
               onChange={onChange}
               className={className}
               groupId={groupId}
+              onInvalid={onInvalid}
             />
           );
       })}
@@ -87,5 +109,16 @@ function findType(id) {
       return 'month';
     default:
       return 'text';
+  }
+}
+
+function placeHolder(id) {
+  switch (id) {
+    case 'email':
+      return 'name@example.com';
+    case 'phoneNumber':
+      return '+Code & Number';
+    case 'studyCertification':
+      return 'Bachelor';
   }
 }

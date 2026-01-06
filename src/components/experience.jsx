@@ -7,6 +7,7 @@ export default function Experience({
   onChange,
   onClick,
   onDelete,
+  onInvalid,
 }) {
   return (
     <fieldset className="experience">
@@ -19,6 +20,7 @@ export default function Experience({
           groupId={inputsGroup.id}
           onChange={onChange}
           onDelete={onDelete}
+          onInvalid={onInvalid}
         />
       ))}
       <Button value="Add" text="Add" onClick={onClick} className="experience" />
