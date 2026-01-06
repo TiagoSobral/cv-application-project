@@ -9,7 +9,7 @@ export default function CvRendered({ form, onEdit }) {
   const experience = form.experience.children;
 
   return (
-    <>
+    <div className="renderPage">
       <AboutMe
         firstName={personalInfo.firstName}
         LastName={personalInfo.lastName}
@@ -18,8 +18,10 @@ export default function CvRendered({ form, onEdit }) {
       />
       <RenderedEducation children={education} />
       <RenderedWork children={experience} />
-      <Button className="aboutBtn" value="edit" onClick={onEdit} />
-    </>
+      <div className="edit">
+        <Button className="editBtn" value="edit" onClick={onEdit} />
+      </div>
+    </div>
   );
 }
 
@@ -27,7 +29,7 @@ function AboutMe({ firstName, LastName, email, phoneNumber }) {
   const emailLink = `mailito:${email}`;
   const phoneLink = `tel:${phoneNumber}`;
   return (
-    <>
+    <section className="personalInfo">
       <h1 className="personName">
         {firstName} {LastName}
       </h1>
@@ -39,7 +41,7 @@ function AboutMe({ firstName, LastName, email, phoneNumber }) {
           <a href={phoneLink}>{phoneNumber}</a>
         </li>
       </ul>
-    </>
+    </section>
   );
 }
 
@@ -49,11 +51,11 @@ function RenderedEducation({ children }) {
       <h1>Education</h1>
       {children.map((child) => (
         <ul className="school" key={child.id}>
-          <li>
+          <li className="schoolName">
             <b>{child.schoolName}</b>
           </li>
-          <li>{child.studyCertification}</li>
-          <li>{child.studyDate}</li>
+          <li className="certification">{child.studyCertification}</li>
+          <li className="date">{child.studyDate}</li>
         </ul>
       ))}
     </section>
@@ -61,6 +63,7 @@ function RenderedEducation({ children }) {
 }
 
 function RenderedWork({ children }) {
+  console.log(children);
   return (
     <section className="experience">
       <h1>Work Experience</h1>
