@@ -106,7 +106,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     let edu = hasErrors(errorEdu);
     let exp = hasErrors(errorExp);
 
-    if (personal && edu && exp) {
+    if (!personal && !edu && !exp) {
       e.preventDefault();
       setPage(1);
     }
@@ -201,7 +201,7 @@ function hasErrors(value) {
     ? (errors = value.map((child) => Object.values(child)))
     : (errors = Object.values(value));
   let foundError = errors.filter((value) => value != '');
-  return foundError.length > 0 ? true : false;
+  return foundError.length > 0;
 }
 
 export { CvApplication, Header };
