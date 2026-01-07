@@ -84,7 +84,7 @@ input[type='month'] {
 
 /* ------------------- TEXTAREA - JOB DESCRIPTION --------------------- */
 
-#jobDescription {
+#description {
   resize: none;
   max-width: 99%;
   height: 100px;

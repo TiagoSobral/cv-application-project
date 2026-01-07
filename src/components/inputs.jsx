@@ -13,7 +13,6 @@ function Input({
   const labelText = dataElementGeneration[className][valueId];
   const inputType = findType(valueId);
   const example = placeHolder(valueId);
-
   return (
     <p>
       <label htmlFor={valueId}>{labelText}</label>
@@ -37,13 +36,13 @@ function JobDescription({ groupId, inputValue, onChange, onInvalid }) {
     <p>
       <label htmlFor="jobDescription">Description: </label>
       <textarea
-        name="jobDescription"
-        id="jobDescription"
+        name="description"
+        id="description"
         className="experience"
         data-key={groupId}
+        value={inputValue}
         onChange={onChange}
         onInvalid={onInvalid}
-        defaultValue={inputValue}
         required
       ></textarea>
     </p>
