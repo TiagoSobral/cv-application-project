@@ -9,7 +9,6 @@ export default function App() {
 
   function handleEdit() {
     setPage(0);
-    console.log(inputValues);
   }
 
   return page === 0 ? (

@@ -63,7 +63,6 @@ function RenderedEducation({ children }) {
 }
 
 function RenderedWork({ children }) {
-  console.log(children);
   return (
     <section className="experience">
       <h1>Work Experience</h1>
