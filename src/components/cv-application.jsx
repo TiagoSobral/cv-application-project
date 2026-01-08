@@ -2,17 +2,18 @@ import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
-import { cvData, educationChild, experienceChild } from './data';
+import { educationChild, experienceChild } from './data';
 // import fluid from '../assets/fluid.png';
 import fluidtwo from '../assets/fluid-two.png';
 import { useState } from 'react';
 
 function CvApplication({ inputValues, setInputValues, setPage }) {
-  const [errorPerson, setErrorPerson] = useState(cvData.personalInfo);
-  const [errorEdu, setErrorEdu] = useState(cvData.education.children);
-  const [errorExp, setErrorExp] = useState(cvData.experience.children);
+  const [errorPerson, setErrorPerson] = useState(inputValues.personalInfo);
+  const [errorEdu, setErrorEdu] = useState(inputValues.education.children);
+  const [errorExp, setErrorExp] = useState(inputValues.experience.children);
 
   function handleInput(e) {
+    // this function sets the state of inputValues in one single object.
     const className = e.target.className;
     const id = e.target.id;
     const value = e.target.value;
@@ -55,6 +56,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
   }
 
   function handleAddInputs(e) {
+    // adds a new group of inputs once add btn is clicked based on its className
     const className = e.target.className;
     const newEducation = { ...educationChild, id: crypto.randomUUID() };
     const newExperience = { ...experienceChild, id: crypto.randomUUID() };
@@ -103,10 +105,10 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
 
   function handleSubmit(e) {
     let personal = hasErrors(errorPerson);
-    let edu = hasErrors(errorEdu);
-    let exp = hasErrors(errorExp);
+    let edu = hasErrors(errorEdu).every((inputGroup) => inputGroup === true);
+    let exp = hasErrors(errorExp).every((inputGroup) => inputGroup === true);
 
-    if (!personal && !edu && !exp) {
+    if (personal && edu && exp) {
       e.preventDefault();
       setPage(1);
     }
@@ -197,11 +199,22 @@ function deleteChild(array, id) {
 
 function hasErrors(value) {
   let errors;
-  Array.isArray(value)
-    ? (errors = value.map((child) => Object.values(child)))
-    : (errors = Object.values(value));
-  let foundError = errors.filter((value) => value != '');
-  return foundError.length > 0;
+  let foundError;
+  if (Array.isArray(value)) {
+    // when the value received is from experience or education.
+    errors = value.map((child) =>
+      Object.values(child).filter((value) => value != child.id)
+    );
+    /* checks each child and within that child returns all the values that are not the id value.
+       it should return either the error message or an empty field */
+    foundError = errors.map((child) => child.every((value) => value !== ''));
+  } else {
+    // when it comes from personalInfo
+    errors = Object.values(value);
+    foundError = errors.every((value) => value !== '');
+  }
+  // returns true when has error message false when it doesn't
+  return foundError;
 }
 
 export { CvApplication, Header };
