@@ -37,7 +37,7 @@ const educationChild = {
 };
 
 const experienceChild = {
-  id: crypto.randomUUID(),
+  id: '',
   companyName: '',
   jobTitle: '',
   workDateStart: '',
