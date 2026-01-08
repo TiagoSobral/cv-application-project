@@ -1,14 +1,67 @@
 @media (max-width: 1480px) {
+  .renderPage {
+    grid-template-columns: 60ch;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  section h1:not(.personName) {
+    margin: 1.2rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: solid 1px black;
+  }
+
+  .contacts {
+    gap: 1rem;
+  }
+
+  .school,
+  .job {
+    grid-template-columns: 1fr 0.5fr;
+  }
+
+  .schoolName,
+  .certification {
+    grid-column: 1 / 2;
+  }
+
+  .date {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    text-align: end;
+  }
+
+  .workDate {
+    text-align: end;
+  }
+
+  .jobDescription {
+    padding-top: 1.5rem;
+    grid-column: 1 / 3;
+  }
 }
 
-@media (max-width: 530px) {
+@media (max-width: 480px) {
+  .renderPage {
+    grid-template-columns: 400px;
+  }
+
+  section {
+    width: 70%;
+  }
+
   .personName {
     font-size: 38px;
     margin-top: 3rem;
     margin-bottom: 0.5rem;
   }
 
-  section h1 {
+  section.education h1,
+  section.experience h1 {
     margin: 1rem 0;
     font-size: 30px;
     padding-bottom: 0.5rem;
@@ -20,17 +73,33 @@
     gap: 5px;
   }
 
-  ul {
+  .contacts {
     text-align: center;
+  }
+
+  .date {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    text-align: end;
+  }
+
+  .job > li {
+    grid-column: 1 / 3;
+  }
+
+  .workDate {
+    grid-row: 3 / 4;
+    text-align: start;
+  }
+
+  .jobDescription {
+    padding-top: 1.5rem;
+    grid-column: 1 / 3;
   }
 
   .edit {
     display: flex;
     justify-content: center;
     margin: 2rem;
-  }
-
-  .editBtn {
-    padding: 1.2rem 2rem;
   }
 }

@@ -19,7 +19,7 @@ export default function CvRendered({ form, onEdit }) {
       <RenderedEducation children={education} />
       <RenderedWork children={experience} />
       <div className="edit">
-        <Button className="editBtn" value="edit" onClick={onEdit} />
+        <Button className="editBtn" value="edit" text="Edit" onClick={onEdit} />
       </div>
     </div>
   );
@@ -68,13 +68,13 @@ function RenderedWork({ children }) {
       <h1>Work Experience</h1>
       {children.map((child) => (
         <ul className="job" key={child.id}>
-          <li>{child.jobTitle}</li>
-          <li>
-            {format(new Date(child.workDateStart), 'MMM-yyyy')} {' - '}
-            {format(new Date(child.workDateEnd), 'MMM-yyyy')}
+          <li className="jobTitle">{child.jobTitle}</li>
+          <li className="workDate">
+            {format(new Date(child.workDateStart), 'MMM yyyy')} {' - '}
+            {format(new Date(child.workDateEnd), 'MMM yyyy')}
           </li>
-          <li>{child.companyName}</li>
-          <li>{child.description}</li>
+          <li className="companyName">{child.companyName}</li>
+          <li className="jobDescription">{child.description}</li>
         </ul>
       ))}
     </section>

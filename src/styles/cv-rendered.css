@@ -1,9 +1,45 @@
-.personName {
-	text-align: center;
+@import url(./queries-rendered.css);
+
+.renderPage {
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+  max-width: 800px;
+}
+
+h1.personName {
+  text-align: center;
 }
 
 .contacts {
-	display: flex;
-	gap: 2rem;
-	justify-content: center;
+  gap: 2rem;
+}
+
+section,
+.school,
+.job {
+  display: grid;
+}
+
+section.education > *,
+section.experience > * {
+  padding: 0 1rem;
+}
+
+.jobDescription {
+  word-break: break-all;
+}
+
+.edit {
+  margin: 2rem;
+}
+
+button[value='edit'] {
+  width: 5rem;
+  height: 3rem;
+}
+
+.contacts {
+  display: flex;
+  justify-content: center;
 }
