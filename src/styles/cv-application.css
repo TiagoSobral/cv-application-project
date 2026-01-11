@@ -192,3 +192,11 @@ main button {
   background-repeat: no-repeat;
   background-color: transparent;
 }
+
+input:user-invalid {
+  border-color: red;
+}
+
+input:valid {
+  border-color: green;
+}

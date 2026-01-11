@@ -1,4 +1,4 @@
-@media (max-width: 1480px) {
+@media (min-width: 480px) {
   .renderPage {
     grid-template-columns: 60ch;
     justify-content: center;
