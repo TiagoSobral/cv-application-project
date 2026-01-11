@@ -7,7 +7,7 @@ export default function Education({
   inputValues,
   onClick,
   onDelete,
-  onInvalid,
+  onBlur,
 }) {
   return (
     <fieldset className="education">
@@ -20,7 +20,7 @@ export default function Education({
           groupId={inputsGroup.id}
           onChange={onChange}
           onDelete={onDelete}
-          onInvalid={onInvalid}
+          onBlur={onBlur}
         />
       ))}
       <Button value="Add" text="Add" onClick={onClick} className="education" />

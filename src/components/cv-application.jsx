@@ -5,13 +5,14 @@ import Button from './buttons';
 import { educationChild, experienceChild } from './data';
 // import fluid from '../assets/fluid.png';
 import fluidtwo from '../assets/fluid-two.png';
-import { useState } from 'react';
 
-function CvApplication({ inputValues, setInputValues, setPage }) {
-  const [errorPerson, setErrorPerson] = useState(inputValues.personalInfo);
-  const [errorEdu, setErrorEdu] = useState(inputValues.education.children);
-  const [errorExp, setErrorExp] = useState(inputValues.experience.children);
-
+function CvApplication({
+  inputValues,
+  setInputValues,
+  setPage,
+  errors,
+  setErrors,
+}) {
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -85,33 +86,41 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
   }
 
   /* returns the error message to each of their own error state */
-  function handleInvalid(e) {
+  function handleOnBlur(e) {
     let className = e.target.className;
     let name = e.target.id;
     let groupId = e.target.dataset.key;
     let error = e.target.validationMessage;
 
-    switch (className) {
-      case 'personalInfo':
-        setErrorPerson({ ...errorPerson, [name]: error });
-        break;
-      case 'education':
-        setErrorEdu(updateChildrenValues(errorEdu, name, error, groupId));
-        break;
-      case 'experience':
-        setErrorExp(updateChildrenValues(errorExp, name, error, groupId));
+    if (error === '') {
+      return;
+    } else if (className === 'personalInfo') {
+      setErrors({
+        ...errors,
+        [className]: {
+          ...errors[className],
+          [name]: error,
+        },
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [className]: {
+          ...errors[className],
+          children: updateChildrenValues(
+            errors[className].children,
+            name,
+            error,
+            groupId
+          ),
+        },
+      });
     }
   }
 
   function handleSubmit(e) {
-    let personal = hasErrors(errorPerson);
-    let edu = hasErrors(errorEdu).every((inputGroup) => inputGroup === true);
-    let exp = hasErrors(errorExp).every((inputGroup) => inputGroup === true);
-
-    if (personal && edu && exp) {
-      e.preventDefault();
-      setPage(1);
-    }
+    e.preventDefault();
+    setPage(1);
   }
 
   function handleDelete(e, inputValues, setInputValues) {
@@ -136,40 +145,34 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
       <img src={fluidtwo} className="fluidTopLeft" />
       <Header className="title" titleText="Resume Generator" />
       <main>
-        <form className="application">
+        <form className="application" onSubmit={handleSubmit}>
           <PersonalInformation
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
-            onInvalid={handleInvalid}
+            onBlur={handleOnBlur}
           />
           <Education
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
             onDelete={handleDelete}
-            onInvalid={handleInvalid}
+            onBlur={handleOnBlur}
           />
           <Experience
             onChange={handleInput}
             inputValues={inputValues}
             onClick={handleAddInputs}
             onDelete={handleDelete}
-            onInvalid={handleInvalid}
+            onBlur={handleOnBlur}
           />
           <div className="submit">
-            <Button
-              id="submit"
-              type="submit"
-              value="submit"
-              text="Submit"
-              onClick={handleSubmit}
-            />
+            <Button id="submit" type="submit" value="submit" text="Submit" />
           </div>
         </form>
       </main>
       <footer>
-        <h1>Tiago Sobral</h1>
+        <h1>©Tiago Sobral</h1>
         <button className="gitHub">
           <a href=""></a>
         </button>
@@ -195,26 +198,6 @@ function updateChildrenValues(childrenArray, id, value, dataKey) {
 
 function deleteChild(array, id) {
   return array.filter((child) => child.id != id);
-}
-
-function hasErrors(value) {
-  let errors;
-  let foundError;
-  if (Array.isArray(value)) {
-    // when the value received is from experience or education.
-    errors = value.map((child) =>
-      Object.values(child).filter((value) => value != child.id)
-    );
-    /* checks each child and within that child returns all the values that are not the id value.
-       it should return either the error message or an empty field */
-    foundError = errors.map((child) => child.every((value) => value !== ''));
-  } else {
-    // when it comes from personalInfo
-    errors = Object.values(value);
-    foundError = errors.every((value) => value !== '');
-  }
-  // returns true when has error message false when it doesn't
-  return foundError;
 }
 
 export { CvApplication, Header };

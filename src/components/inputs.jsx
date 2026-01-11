@@ -6,7 +6,7 @@ function Input({
   className = 'personalInfo',
   groupId,
   onChange,
-  onInvalid,
+  onBlur,
 }) {
   const valueId = inputInfo[0];
   const inputValue = inputInfo[1];
@@ -24,14 +24,14 @@ function Input({
         data-key={groupId}
         onChange={onChange}
         placeholder={example}
-        onInvalid={onInvalid}
+        onBlur={onBlur}
         required
       />
     </p>
   );
 }
 
-function JobDescription({ groupId, inputValue, onChange, onInvalid }) {
+function JobDescription({ groupId, inputValue, onChange, onBlur }) {
   return (
     <p>
       <label htmlFor="jobDescription">Description: </label>
@@ -42,7 +42,7 @@ function JobDescription({ groupId, inputValue, onChange, onInvalid }) {
         data-key={groupId}
         value={inputValue}
         onChange={onChange}
-        onInvalid={onInvalid}
+        onBlur={onBlur}
         required
       ></textarea>
     </p>
@@ -55,7 +55,7 @@ export default function GroupInputFields({
   groupId,
   onChange,
   onDelete,
-  onInvalid,
+  onBlur,
 }) {
   return (
     <div className="inputs">
@@ -67,17 +67,17 @@ export default function GroupInputFields({
               onChange={onChange}
               groupId={groupId}
               inputValue={value[1]}
-              onInvalid={onInvalid}
+              onBlur={onBlur}
             />
           );
-        if (valueId != 'id')
+        if (valueId != 'id' && valueId != 'errors')
           return (
             <Input
               inputInfo={value}
               onChange={onChange}
               className={className}
               groupId={groupId}
-              onInvalid={onInvalid}
+              onBlur={onBlur}
             />
           );
       })}
