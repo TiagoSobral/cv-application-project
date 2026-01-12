@@ -3,8 +3,6 @@ import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
 import { educationChild, experienceChild } from './data';
-// import fluid from '../assets/fluid.png';
-import fluidtwo from '../assets/fluid-two.png';
 
 function CvApplication({
   inputValues,
@@ -140,9 +138,6 @@ function CvApplication({
 
   return (
     <>
-      <img src={fluidtwo} className="fluidTopRight" />
-      <img src={fluidtwo} className="fluidTop" />
-      <img src={fluidtwo} className="fluidTopLeft" />
       <Header className="title" titleText="Resume Generator" />
       <main>
         <form className="application" onSubmit={handleSubmit}>
