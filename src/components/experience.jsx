@@ -12,7 +12,7 @@ export default function Experience({
   return (
     <fieldset className="experience">
       <Header className="title" titleText="Experience" />
-      {inputValues.experience.children.map((inputsGroup) => (
+      {inputValues.experience.map((inputsGroup) => (
         <GroupInputFields
           key={inputsGroup.id}
           className="experience"

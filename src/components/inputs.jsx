@@ -85,7 +85,7 @@ export default function GroupInputFields({
         <Button
           value="delete"
           className={className}
-          id={groupId}
+          dataId={groupId}
           onClick={onDelete}
         />
       )}

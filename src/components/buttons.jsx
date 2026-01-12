@@ -3,10 +3,17 @@ export default function Button({
   value,
   text = '',
   className,
+  dataId = 'page',
   onClick,
 }) {
   return (
-    <button className={className} type={type} value={value} onClick={onClick}>
+    <button
+      className={className}
+      data-id={dataId}
+      type={type}
+      value={value}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

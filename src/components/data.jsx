@@ -5,28 +5,24 @@ let cvData = {
     email: '',
     phoneNumber: '',
   },
-  education: {
-    children: [
-      {
-        id: crypto.randomUUID(),
-        schoolName: '',
-        studyCertification: '',
-        studyDate: '',
-      },
-    ],
-  },
-  experience: {
-    children: [
-      {
-        id: crypto.randomUUID(),
-        companyName: '',
-        jobTitle: '',
-        workDateStart: '',
-        workDateEnd: '',
-        description: '',
-      },
-    ],
-  },
+  education: [
+    {
+      id: crypto.randomUUID(),
+      schoolName: '',
+      studyCertification: '',
+      studyDate: '',
+    },
+  ],
+  experience: [
+    {
+      id: crypto.randomUUID(),
+      companyName: '',
+      jobTitle: '',
+      workDateStart: '',
+      workDateEnd: '',
+      description: '',
+    },
+  ],
 };
 
 const educationChild = {

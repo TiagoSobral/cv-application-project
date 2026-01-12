@@ -11,6 +11,7 @@ function CvApplication({
   errors,
   setErrors,
 }) {
+  console.log(inputValues);
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -18,67 +19,37 @@ function CvApplication({
     const value = e.target.value;
     const dataKey = e.target.dataset.key;
 
-    switch (className) {
-      case 'personalInfo': {
-        const personalInfo = inputValues.personalInfo;
-        setInputValues({
-          ...inputValues,
-          personalInfo: { ...personalInfo, [id]: value },
-        });
-        break;
-      }
-      case 'education': {
-        const education = inputValues.education;
-        const eduChildren = education.children;
-        setInputValues({
-          ...inputValues,
-          education: {
-            ...education,
-            children: updateChildrenValues(eduChildren, id, value, dataKey),
-          },
-        });
-        break;
-      }
-      case 'experience': {
-        const experience = inputValues.experience;
-        const expChildren = experience.children;
-        setInputValues({
-          ...inputValues,
-          experience: {
-            ...experience,
-            children: updateChildrenValues(expChildren, id, value, dataKey),
-          },
-        });
-        break;
-      }
+    if (className === 'personalInfo') {
+      setInputValues({
+        ...inputValues,
+        [className]: { ...inputValues[className], [id]: value },
+      });
+    } else {
+      let groupChildren = inputValues[className].children;
+      setInputValues({
+        ...inputValues,
+        [className]: updateValuesInGroup(groupChildren, id, value, dataKey),
+      });
     }
   }
 
   function handleAddInputs(e) {
     // adds a new group of inputs once add btn is clicked based on its className
     const className = e.target.className;
-    const newEducation = { ...educationChild, id: crypto.randomUUID() };
-    const newExperience = { ...experienceChild, id: crypto.randomUUID() };
 
     if (className === 'education') {
+      const newEducation = { ...educationChild, id: crypto.randomUUID() };
       const education = inputValues.education;
-      const children = inputValues.education.children;
       setInputValues({
         ...inputValues,
-        education: {
-          ...education,
-          children: [...children, newEducation],
-        },
+        education: [...education, newEducation],
       });
     } else {
+      const newExperience = { ...experienceChild, id: crypto.randomUUID() };
       const experience = inputValues.experience;
-      const children = inputValues.experience.children;
       setInputValues({
         ...inputValues,
-        experience: {
-          ...experience,
-          children: [...children, newExperience],
-        },
+        experience: [...experience, newExperience],
       });
     }
   }
@@ -103,15 +74,12 @@ function CvApplication({
     } else {
       setErrors({
         ...errors,
-        [className]: {
-          ...errors[className],
-          children: updateChildrenValues(
-            errors[className].children,
-            name,
-            error,
-            groupId
-          ),
-        },
+        [className]: updateValuesInGroup(
+          errors[className].children,
+          name,
+          error,
+          groupId
+        ),
       });
     }
   }
@@ -121,18 +89,14 @@ function CvApplication({
     setPage(1);
   }
 
-  function handleDelete(e, inputValues, setInputValues) {
+  function handleDelete(e) {
     const deleteId = e.target.dataset.id;
-    const deleteClass = e.target.className;
-    const section = inputValues[deleteClass];
-    const sectionChildren = section.children;
+    const className = e.target.className;
+    const section = inputValues[className];
 
     setInputValues({
       ...inputValues,
-      [deleteClass]: {
-        ...section,
-        children: [deleteChild(sectionChildren, deleteId)],
-      },
+      [className]: deleteChild(section, deleteId),
     });
   }
 
@@ -185,7 +149,7 @@ function Header({ className, titleText }) {
   );
 }
 
-function updateChildrenValues(childrenArray, id, value, dataKey) {
+function updateValuesInGroup(childrenArray, id, value, dataKey) {
   return childrenArray.map((element) =>
     element.id == dataKey ? { ...element, [id]: value } : element
   );
