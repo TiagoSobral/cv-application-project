@@ -1,4 +1,7 @@
 @import url(./queries-application.css);
+body {
+  background-image: linear-gradient(135deg, #f5f7fa33 0%, #c3cfe247 100%);
+}
 
 #root {
   width: 100%;
@@ -15,19 +18,31 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(181, 218, 255);
-  box-shadow: 0.1rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.413);
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.083);
 }
 
 #root > header .title {
   margin: 1rem;
-  padding-bottom: 2rem;
   font-size: 40px;
   text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.262);
 }
 
 .application .title {
   font-size: 34px;
+}
+
+#root > header,
+footer {
+  background: linear-gradient(to bottom, #9da6d1, #a8b6f6);
+}
+
+footer {
+  background: linear-gradient(to top, #9da6d1, #a8b6f6);
+}
+
+#root > header,
+footer {
+  color: white;
 }
 
 /* ------------------- MAIN AREA STYLING --------------------- */
@@ -108,25 +123,6 @@ footer h1 {
   font-weight: 500;
 }
 
-/* ------------------- IMAGES --------------------- */
-
-.fluidTop,
-.fluidTopLeft,
-.fluidTopRight {
-  position: absolute;
-}
-
-.fluidTop,
-.fluidTopLeft,
-.fluidTopRight {
-  filter: drop-shadow(250px -20px 1px #ffffff);
-  scale: 0.5;
-}
-/* 
-.fluidBottom {
-  opacity: 80%;
-} */
-
 /* ------------------- OUTLINE --------------------- */
 
 input:focus {
@@ -152,14 +148,8 @@ main {
   z-index: 4;
 }
 
-.fluidTop,
-.fluidTopLeft,
-.fluidTopRight {
+.image {
   z-index: 3;
-}
-
-.fluidBottom {
-  z-index: 1;
 }
 
 /* ------------------- BUTTONS --------------------- */
