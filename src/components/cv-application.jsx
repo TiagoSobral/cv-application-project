@@ -2,7 +2,7 @@ import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
-import { educationChild, experienceChild } from './data';
+import { education, experience } from './data';
 
 function CvApplication({
   inputValues,
@@ -11,7 +11,6 @@ function CvApplication({
   errors,
   setErrors,
 }) {
-  console.log(inputValues);
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -38,18 +37,16 @@ function CvApplication({
     const className = e.target.className;
 
     if (className === 'education') {
-      const newEducation = { ...educationChild, id: crypto.randomUUID() };
-      const education = inputValues.education;
+      const newEducation = { ...education, id: crypto.randomUUID() };
       setInputValues({
         ...inputValues,
-        education: [...education, newEducation],
+        [className]: [...inputValues[className], newEducation],
       });
     } else {
-      const newExperience = { ...experienceChild, id: crypto.randomUUID() };
-      const experience = inputValues.experience;
+      const newExperience = { ...experience, id: crypto.randomUUID() };
       setInputValues({
         ...inputValues,
-        experience: [...experience, newExperience],
+        [className]: [...inputValues[className], newExperience],
       });
     }
   }

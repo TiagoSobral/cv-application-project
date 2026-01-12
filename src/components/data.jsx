@@ -25,14 +25,14 @@ let cvData = {
   ],
 };
 
-const educationChild = {
+const education = {
   id: '',
   schoolName: '',
   studyCertification: '',
   studyDate: '',
 };
 
-const experienceChild = {
+const experience = {
   id: '',
   companyName: '',
   jobTitle: '',
@@ -62,4 +62,4 @@ const dataElementGeneration = {
   },
 };
 
-export { cvData, educationChild, experienceChild, dataElementGeneration };
+export { cvData, education, experience, dataElementGeneration };
