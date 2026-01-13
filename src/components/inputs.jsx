@@ -15,6 +15,9 @@ function Input({
   const inputType = findType(valueId);
   const example = placeHolder(valueId);
   let error = findErrorValue(errors, groupId, valueId);
+  let errorClass = 'inactive';
+
+  if (error != '') errorClass = 'active';
 
   return (
     <p>
@@ -30,7 +33,7 @@ function Input({
         onBlur={onBlur}
         required
       />
-      <span>{error}</span>
+      <span className={errorClass}>{error}</span>
     </p>
   );
 }
