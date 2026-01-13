@@ -17,7 +17,7 @@ function Input({
   let error = findErrorValue(errors, groupId, valueId);
   let errorClass = 'inactive';
 
-  if (error != '') errorClass = 'active';
+  if (error != '' && error != 'no error') errorClass = 'active';
 
   return (
     <p>
@@ -28,8 +28,8 @@ function Input({
         value={inputValue}
         className={className}
         data-key={groupId}
-        onChange={onChange}
         placeholder={example}
+        onChange={onChange}
         onBlur={onBlur}
         required
       />
@@ -38,7 +38,12 @@ function Input({
   );
 }
 
-function JobDescription({ groupId, inputValue, onChange, onBlur }) {
+function JobDescription({ groupId, inputValue, errors, onChange, onBlur }) {
+  let error = findErrorValue(errors, groupId, 'description');
+  let errorClass = 'inactive';
+
+  if (error != '' && error != 'no error') errorClass = 'active';
+
   return (
     <p>
       <label htmlFor="jobDescription">Description: </label>
@@ -52,6 +57,7 @@ function JobDescription({ groupId, inputValue, onChange, onBlur }) {
         onBlur={onBlur}
         required
       ></textarea>
+      <span className={errorClass}>{error}</span>
     </p>
   );
 }
@@ -74,6 +80,7 @@ export default function GroupInputFields({
             <JobDescription
               groupId={groupId}
               inputValue={value[1]}
+              errors={errors}
               onChange={onChange}
               onBlur={onBlur}
             />
