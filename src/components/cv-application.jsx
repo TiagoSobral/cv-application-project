@@ -2,15 +2,12 @@ import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
-import { education, experience } from './data';
+import { cvData, education, experience } from './data';
+import { useState } from 'react';
 
-function CvApplication({
-  inputValues,
-  setInputValues,
-  setPage,
-  errors,
-  setErrors,
-}) {
+function CvApplication({ inputValues, setInputValues, setPage }) {
+  const [errors, setErrors] = useState(cvData);
+  console.log(errors);
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -42,11 +39,19 @@ function CvApplication({
         ...inputValues,
         [className]: [...inputValues[className], newEducation],
       });
+      setErrors({
+        ...errors,
+        [className]: [...errors[className], newEducation],
+      });
     } else {
       const newExperience = { ...experience, id: crypto.randomUUID() };
       setInputValues({
         ...inputValues,
         [className]: [...inputValues[className], newExperience],
+      });
+      setErrors({
+        ...errors,
+        [className]: [...errors[className], newExperience],
       });
     }
   }
@@ -58,21 +63,16 @@ function CvApplication({
     let groupId = e.target.dataset.key;
     let error = e.target.validationMessage;
 
-    if (error === '') {
-      return;
-    } else if (className === 'personalInfo') {
+    if (className === 'personalInfo') {
       setErrors({
         ...errors,
-        [className]: {
-          ...errors[className],
-          [name]: error,
-        },
+        [className]: { ...errors[className], [name]: error },
       });
     } else {
       setErrors({
         ...errors,
         [className]: updateValuesInGroup(
-          errors[className].children,
+          errors[className],
           name,
           error,
           groupId
@@ -103,21 +103,24 @@ function CvApplication({
       <main>
         <form className="application" onSubmit={handleSubmit}>
           <PersonalInformation
+            inputValues={inputValues.personalInfo}
+            errors={errors.personalInfo}
             onChange={handleInput}
-            inputValues={inputValues}
             onClick={handleAddInputs}
             onBlur={handleOnBlur}
           />
           <Education
+            inputValues={inputValues.education}
+            errors={errors.education}
             onChange={handleInput}
-            inputValues={inputValues}
             onClick={handleAddInputs}
             onDelete={handleDelete}
             onBlur={handleOnBlur}
           />
           <Experience
+            inputValues={inputValues.experience}
+            errors={errors.experience}
             onChange={handleInput}
-            inputValues={inputValues}
             onClick={handleAddInputs}
             onDelete={handleDelete}
             onBlur={handleOnBlur}
@@ -132,7 +135,6 @@ function CvApplication({
         <button className="gitHub">
           <a href=""></a>
         </button>
-        {/* <img className="fluidBottom" src={fluid} /> */}
       </footer>
     </>
   );

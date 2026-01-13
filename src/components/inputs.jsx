@@ -5,6 +5,7 @@ function Input({
   inputInfo,
   className = 'personalInfo',
   groupId,
+  errors,
   onChange,
   onBlur,
 }) {
@@ -13,6 +14,8 @@ function Input({
   const labelText = dataElementGeneration[className][valueId];
   const inputType = findType(valueId);
   const example = placeHolder(valueId);
+  let error = findErrorValue(errors, groupId, valueId);
+
   return (
     <p>
       <label htmlFor={valueId}>{labelText}</label>
@@ -27,6 +30,7 @@ function Input({
         onBlur={onBlur}
         required
       />
+      <span>{error}</span>
     </p>
   );
 }
@@ -53,6 +57,7 @@ export default function GroupInputFields({
   className,
   groupInfo,
   groupId,
+  errors,
   onChange,
   onDelete,
   onBlur,
@@ -64,9 +69,9 @@ export default function GroupInputFields({
         if (valueId === 'description')
           return (
             <JobDescription
-              onChange={onChange}
               groupId={groupId}
               inputValue={value[1]}
+              onChange={onChange}
               onBlur={onBlur}
             />
           );
@@ -74,9 +79,10 @@ export default function GroupInputFields({
           return (
             <Input
               inputInfo={value}
-              onChange={onChange}
               className={className}
               groupId={groupId}
+              errors={errors}
+              onChange={onChange}
               onBlur={onBlur}
             />
           );
@@ -120,4 +126,12 @@ function placeHolder(id) {
     case 'studyCertification':
       return 'Bachelor';
   }
+}
+
+function findErrorValue(errors, id, inputName) {
+  return Array.isArray(errors)
+    ? errors.map((error) => {
+        if (error.id === id) return error[inputName];
+      })
+    : errors[inputName];
 }

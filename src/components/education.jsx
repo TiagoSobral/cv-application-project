@@ -3,8 +3,9 @@ import { Header } from './cv-application';
 import Button from './buttons';
 
 export default function Education({
-  onChange,
   inputValues,
+  errors,
+  onChange,
   onClick,
   onDelete,
   onBlur,
@@ -12,12 +13,13 @@ export default function Education({
   return (
     <fieldset className="education">
       <Header className="title" titleText="Education" />
-      {inputValues.education.map((inputsGroup) => (
+      {inputValues.map((inputsGroup) => (
         <GroupInputFields
           key={inputsGroup.id}
           className="education"
           groupInfo={inputsGroup}
           groupId={inputsGroup.id}
+          errors={errors}
           onChange={onChange}
           onDelete={onDelete}
           onBlur={onBlur}
