@@ -5,8 +5,8 @@ import { format } from 'date-fns';
 
 export default function CvRendered({ form, onEdit }) {
   const personalInfo = form.personalInfo;
-  const education = form.education.children;
-  const experience = form.experience.children;
+  const education = form.education;
+  const experience = form.experience;
 
   return (
     <div className="renderPage">

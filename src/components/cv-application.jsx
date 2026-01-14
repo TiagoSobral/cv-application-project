@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 function CvApplication({ inputValues, setInputValues, setPage }) {
   const [errors, setErrors] = useState(cvData);
-  console.log(errors);
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -21,7 +20,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
         [className]: { ...inputValues[className], [id]: value },
       });
     } else {
-      let groupChildren = inputValues[className].children;
+      let groupChildren = inputValues[className];
       setInputValues({
         ...inputValues,
         [className]: updateValuesInGroup(groupChildren, id, value, dataKey),
@@ -62,6 +61,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     let name = e.target.id;
     let groupId = e.target.dataset.key;
     let error = e.target.validationMessage;
+    if (error === '') error = 'no error';
 
     if (className === 'personalInfo') {
       setErrors({
@@ -82,8 +82,16 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
-    setPage(1);
+    let personErrors = hasErrors(errors.personalInfo);
+    let eduErrors = hasErrors(errors.education);
+    let expErrors = hasErrors(errors.experience);
+
+    if (!personErrors && !eduErrors && !expErrors) {
+      e.preventDefault();
+      setPage(1);
+    } else {
+      setErrors(errors);
+    }
   }
 
   function handleDelete(e) {
@@ -101,13 +109,14 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     <>
       <Header className="title" titleText="Resume Generator" />
       <main>
-        <form className="application" onSubmit={handleSubmit}>
+        <form className="application" noValidate>
           <PersonalInformation
             inputValues={inputValues.personalInfo}
             errors={errors.personalInfo}
             onChange={handleInput}
             onClick={handleAddInputs}
             onBlur={handleOnBlur}
+            onInvalid={handleOnBlur}
           />
           <Education
             inputValues={inputValues.education}
@@ -116,6 +125,7 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onClick={handleAddInputs}
             onDelete={handleDelete}
             onBlur={handleOnBlur}
+            onInvalid={handleOnBlur}
           />
           <Experience
             inputValues={inputValues.experience}
@@ -124,9 +134,15 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onClick={handleAddInputs}
             onDelete={handleDelete}
             onBlur={handleOnBlur}
+            onInvalid={handleOnBlur}
           />
           <div className="submit">
-            <Button id="submit" type="submit" value="submit" text="Submit" />
+            <Button
+              id="submit"
+              value="submit"
+              text="Submit"
+              onClick={handleSubmit}
+            />
           </div>
         </form>
       </main>
@@ -156,6 +172,33 @@ function updateValuesInGroup(childrenArray, id, value, dataKey) {
 
 function deleteChild(array, id) {
   return array.filter((child) => child.id != id);
+}
+
+function hasErrors(value) {
+  let error;
+  let foundError;
+  if (Array.isArray(value)) {
+    // when the value received is from experience or education.
+    error = value.map((group) => Object.values(group));
+    // removes the id value from the returning arrays.
+    error = error.map((child) => child.filter((value, index) => index != 0));
+    // goes through the values and returns true if has values an error
+    foundError = error.map((group) =>
+      group.some((value) => value === '' && value != 'no error')
+    );
+    /* if there is more than one group of education or experience go through all and return just a single value  */
+    if (value.length > 1) {
+      foundError = foundError.some((groupInputs) => groupInputs === true);
+    }
+    /* because it will always return an array we access the filtered single value obtain by the previous code */
+    foundError = foundError[0];
+  } else {
+    // when it comes from personalInfo
+    error = Object.values(value);
+    foundError = error.some((value) => value === '' && value != 'no error');
+  }
+  // returns true when has error message false when it doesn't
+  return foundError;
 }
 
 export { CvApplication, Header };

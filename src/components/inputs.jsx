@@ -17,7 +17,11 @@ function Input({
   let error = findErrorValue(errors, groupId, valueId);
   let errorClass = 'inactive';
 
-  if (error != '' && error != 'no error') errorClass = 'active';
+  if (error != '' && error != 'no error') {
+    errorClass = 'active';
+  } else {
+    error = '';
+  }
 
   return (
     <p>
