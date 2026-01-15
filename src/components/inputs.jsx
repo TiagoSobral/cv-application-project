@@ -35,6 +35,7 @@ function Input({
         placeholder={example}
         onChange={onChange}
         onBlur={onBlur}
+        onInvalid={onBlur}
         required
       />
       <span className={errorClass}>{error}</span>
@@ -59,6 +60,7 @@ function JobDescription({ groupId, inputValue, errors, onChange, onBlur }) {
         value={inputValue}
         onChange={onChange}
         onBlur={onBlur}
+        onInvalid={onBlur}
         required
       ></textarea>
       <span className={errorClass}>{error}</span>
@@ -143,9 +145,16 @@ function placeHolder(id) {
 }
 
 function findErrorValue(errors, id, inputName) {
-  return Array.isArray(errors)
-    ? errors.map((error) => {
-        if (error.id === id) return error[inputName];
-      })
-    : errors[inputName];
+  let returnVal;
+  if (Array.isArray(errors)) {
+    for (let i = 0; i < errors.length; i++) {
+      if (errors[i].id === id) {
+        returnVal = errors[i][inputName];
+        break;
+      }
+    }
+  } else {
+    returnVal = errors[inputName];
+  }
+  return returnVal;
 }
