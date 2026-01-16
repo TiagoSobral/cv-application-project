@@ -2,11 +2,16 @@ import PersonalInformation from './personal-info';
 import Education from './education';
 import Experience from './experience';
 import Button from './buttons';
-import { cvData, education, experience } from './data';
-import { useState } from 'react';
+import { education, experience } from './data';
 
-function CvApplication({ inputValues, setInputValues, setPage }) {
-  const [errors, setErrors] = useState(cvData);
+function CvApplication({
+  inputValues,
+  setInputValues,
+  errors,
+  setErrors,
+  setPage,
+}) {
+  console.log(errors);
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -82,15 +87,16 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
+    e.target.checkValidity();
     let personErrors = hasErrors(errors.personalInfo);
     let eduErrors = hasErrors(errors.education);
     let expErrors = hasErrors(errors.experience);
 
     if (!personErrors && !eduErrors && !expErrors) {
-      e.preventDefault();
       setPage(1);
     } else {
-      setErrors(errors);
+      setInitialErrors(e.target);
     }
   }
 
@@ -109,14 +115,13 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
     <>
       <Header className="title" titleText="Resume Generator" />
       <main>
-        <form className="application" noValidate>
+        <form className="application" onSubmit={handleSubmit} noValidate>
           <PersonalInformation
             inputValues={inputValues.personalInfo}
             errors={errors.personalInfo}
             onChange={handleInput}
             onClick={handleAddInputs}
             onBlur={handleOnBlur}
-            onInvalid={handleOnBlur}
           />
           <Education
             inputValues={inputValues.education}
@@ -125,7 +130,6 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onClick={handleAddInputs}
             onDelete={handleDelete}
             onBlur={handleOnBlur}
-            onInvalid={handleOnBlur}
           />
           <Experience
             inputValues={inputValues.experience}
@@ -134,15 +138,9 @@ function CvApplication({ inputValues, setInputValues, setPage }) {
             onClick={handleAddInputs}
             onDelete={handleDelete}
             onBlur={handleOnBlur}
-            onInvalid={handleOnBlur}
           />
           <div className="submit">
-            <Button
-              id="submit"
-              value="submit"
-              text="Submit"
-              onClick={handleSubmit}
-            />
+            <Button id="submit" type="submit" value="submit" text="Submit" />
           </div>
         </form>
       </main>
@@ -199,6 +197,35 @@ function hasErrors(value) {
   }
   // returns true when has error message false when it doesn't
   return foundError;
+}
+
+function areFieldsEmpty(inputValues) {
+  let personGroup = inputValues.personalInfo;
+  let eduGroup = inputValues.education;
+  let expGroup = inputValues.experience;
+  let allFieldsEmpty;
+
+  personGroup = Object.entries(personGroup).every((value) => value === '');
+  eduGroup = eduGroup
+    .map((group) => Object.entries(group).every((value) => value === ''))
+    .every((value) => value === true);
+  expGroup = expGroup
+    .map((group) => Object.entries(group).every((value) => value === ''))
+    .every((value) => value === true);
+
+  personGroup && eduGroup && expGroup
+    ? (allFieldsEmpty = true)
+    : (allFieldsEmpty = false);
+
+  return allFieldsEmpty;
+}
+
+function setInitialErrors(formElement) {
+  let personalInfo = formElement[0];
+
+  personalInfo = personalInfo[1];
+  let education = formElement[1][1];
+  let experience = formElement[2][1];
 }
 
 export { CvApplication, Header };
