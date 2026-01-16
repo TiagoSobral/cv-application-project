@@ -69,20 +69,20 @@ function CvApplication({
     if (error === '') error = 'no error';
 
     if (className === 'personalInfo') {
-      setErrors({
-        ...errors,
-        [className]: { ...errors[className], [name]: error },
-      });
+      setErrors((previousState) => ({
+        ...previousState,
+        [className]: { ...previousState[className], [name]: error },
+      }));
     } else {
-      setErrors({
-        ...errors,
+      setErrors((previousState) => ({
+        ...previousState,
         [className]: updateValuesInGroup(
-          errors[className],
+          previousState[className],
           name,
           error,
           groupId
         ),
-      });
+      }));
     }
   }
 
@@ -96,7 +96,7 @@ function CvApplication({
     if (!personErrors && !eduErrors && !expErrors) {
       setPage(1);
     } else {
-      setInitialErrors(e.target);
+      // setInitialErrors(e.target);
     }
   }
 
@@ -197,35 +197,6 @@ function hasErrors(value) {
   }
   // returns true when has error message false when it doesn't
   return foundError;
-}
-
-function areFieldsEmpty(inputValues) {
-  let personGroup = inputValues.personalInfo;
-  let eduGroup = inputValues.education;
-  let expGroup = inputValues.experience;
-  let allFieldsEmpty;
-
-  personGroup = Object.entries(personGroup).every((value) => value === '');
-  eduGroup = eduGroup
-    .map((group) => Object.entries(group).every((value) => value === ''))
-    .every((value) => value === true);
-  expGroup = expGroup
-    .map((group) => Object.entries(group).every((value) => value === ''))
-    .every((value) => value === true);
-
-  personGroup && eduGroup && expGroup
-    ? (allFieldsEmpty = true)
-    : (allFieldsEmpty = false);
-
-  return allFieldsEmpty;
-}
-
-function setInitialErrors(formElement) {
-  let personalInfo = formElement[0];
-
-  personalInfo = personalInfo[1];
-  let education = formElement[1][1];
-  let experience = formElement[2][1];
 }
 
 export { CvApplication, Header };

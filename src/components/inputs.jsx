@@ -19,10 +19,7 @@ function Input({
 
   if (error != '' && error != 'no error') {
     errorClass = 'active';
-  } else {
-    error = '';
   }
-
   return (
     <p>
       <label htmlFor={valueId}>{labelText}</label>
