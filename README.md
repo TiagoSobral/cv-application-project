@@ -39,7 +39,7 @@ This application allows users to enter their personal information, education, an
 
 The hardest part of this project was implementing **form validation** in React. Since validation works a bit differently compared to vanilla JavaScript, managing controlled inputs and state made the logic more complex than expected.  
 
-This was especially challenging when **all inputs were empty at the beginning** — figuring out when validation errors should appear and how to prevent premature error states required careful handling of state and conditional rendering. Once the validation logic was properly structured, the rest of the form behavior became much easier to manage.
+This was especially challenging when **all inputs were empty at the beginning**. Figuring out when validation errors should appear and how to prevent premature error states required careful handling of state and conditional rendering. Once the validation logic was properly structured, the rest of the form behavior became much easier to manage.
 
 
 ## 🎯 Learning Outcomes
@@ -49,4 +49,5 @@ This was especially challenging when **all inputs were empty at the beginning** 
 - Working with **state** to toggle between edit and preview modes
 - Handling **form validation** in React
 - Structuring a small React application cleanly and logically
+
 
