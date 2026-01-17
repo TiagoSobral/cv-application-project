@@ -20,6 +20,9 @@ function Input({
   if (error != '' && error != 'no error') {
     errorClass = 'active';
   }
+
+  if (error === 'no error') error = '';
+
   return (
     <p>
       <label htmlFor={valueId}>{labelText}</label>
@@ -45,6 +48,8 @@ function JobDescription({ groupId, inputValue, errors, onChange, onBlur }) {
   let errorClass = 'inactive';
 
   if (error != '' && error != 'no error') errorClass = 'active';
+
+  if (error === 'no error') error = '';
 
   return (
     <p>

@@ -11,7 +11,6 @@ function CvApplication({
   setErrors,
   setPage,
 }) {
-  console.log(errors);
   function handleInput(e) {
     // this function sets the state of inputValues in one single object.
     const className = e.target.className;
@@ -80,7 +79,7 @@ function CvApplication({
           previousState[className],
           name,
           error,
-          groupId
+          groupId,
         ),
       }));
     }
@@ -95,8 +94,6 @@ function CvApplication({
 
     if (!personErrors && !eduErrors && !expErrors) {
       setPage(1);
-    } else {
-      // setInitialErrors(e.target);
     }
   }
 
@@ -164,7 +161,7 @@ function Header({ className, titleText }) {
 
 function updateValuesInGroup(childrenArray, id, value, dataKey) {
   return childrenArray.map((element) =>
-    element.id == dataKey ? { ...element, [id]: value } : element
+    element.id == dataKey ? { ...element, [id]: value } : element,
   );
 }
 
@@ -182,7 +179,7 @@ function hasErrors(value) {
     error = error.map((child) => child.filter((value, index) => index != 0));
     // goes through the values and returns true if has values an error
     foundError = error.map((group) =>
-      group.some((value) => value === '' && value != 'no error')
+      group.some((value) => value === '' && value != 'no error'),
     );
     /* if there is more than one group of education or experience go through all and return just a single value  */
     if (value.length > 1) {
